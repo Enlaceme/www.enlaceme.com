@@ -58,9 +58,8 @@ top.location = self.location
 			<a class="topbar-logo" href="http://www.enlaceme.com">
 				<img class="logo-200" src="<?php echo $vParamsViewFrontEndLayout['root_frontend_img'];?>logo-text-white.svg" alt="Logo">
 			</a>
-
-			<!--<a class="topbar-purchase" data-hint="tooltip" data-original-title="Ingresa o registrate gratuitamente!" data-placement="bottom" href="<?Php echo BASE_VIEW_URL; ?>login" role="button">Ingresar</a>-->
-
+            <a class="topbar-link color-white" href="<?Php echo BASE_VIEW_URL; ?>register">Registrarme</a>
+            <a class="topbar-link color-white" href="<?Php echo BASE_VIEW_URL; ?>login">Ingresar</a>
 		</div>
 		<!-- END TOPBAR -->
 		<!-- BEGIN BANNER -->
