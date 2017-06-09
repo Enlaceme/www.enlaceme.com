@@ -17,10 +17,10 @@ class IdEnView  extends IdEnController
 		public function visualizar($vNameView, $vItem = FALSE)
 			{
 
-				$vParamsViewBootstrap = array(
-                                        'root_bootstrap_css'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/bootstrap/css/',
-                                        'root_bootstrap_fonts'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/bootstrap/fonts/',
-                                        'root_bootstrap_js'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/bootstrap/js/'
+				$vParamsViewMaterialize = array(
+                                        'root_materialize_css'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/materialize/css/',
+                                        'root_materialize_fonts'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/materialize/fonts/',
+                                        'root_materialize_js'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/materialize/js/'
 									 );
                 
 				$vParamsViewFrontEndLayout = array(
