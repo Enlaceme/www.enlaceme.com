@@ -74,35 +74,67 @@
       <!--   Icon Section   -->
       <div class="row">
         <div class="col s12 m6">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">flash_on</i></h2>
-            <h5 class="title-header-1 center">Profesionales</h5>
-            <p class="">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>profesionales.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Profesionales<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">Mayor información</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Profesionales<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>
 
         <div class="col s12 m6 last">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">group</i></h2>
-            <h5 class="title-header-1 center">Técnicos</h5>
-            <p class="">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>tecnicos.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Técnicos<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">Mayor información</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Técnicos<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m6">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">settings</i></h2>
-            <h5 class="title-header-1 center">Oficio</h5>
-            <p class="">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>ocupacion.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Oficio<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">Mayor información</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Oficio<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>
 
         <div class="col s12 m6">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">settings</i></h2>
-            <h5 class="title-header-1 center">Pasatiempos</h5>
-            <p class="">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>otros.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Oficio<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">Mayor información</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Oficio<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>          
       </div>
