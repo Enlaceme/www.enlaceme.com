@@ -1,13 +1,39 @@
 /* General Stylesheet */
-body, html {
-    font-family: "Roboto", sans-serif;   
+html {
+    height: 100%;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 /* TEXT STYLES */
-h4.title-h4 { font-size: 36px; font-weight: 300; line-height: 38px; }
-h5.title-h5 { font-size: 26px; font-weight: 100; line-height: 24px; }
+h4.title-h4 { font-size: 36px; line-height: 38px; }
+h5.title-h5 { font-size: 26px; line-height: 24px; }
 
-p.title-p-1 { font-size: 24px; font-weight: 100; line-height: 28px; }
+p.title-p-1 { font-size: 24px; line-height: 28px; }
+p.title-p-2 { font-size: 20px; line-height: 24px; }
+
+.weight50 { font-weight: 50; }
+.weight100 { font-weight: 100; }
+.weight200 { font-weight: 200; }
+.weight300 { font-weight: 300; }
+
+a.link-1 { font-size: 14px; line-height: 16px; }
+
+a.footer-link-1 { font-size: 14px; line-height: 16px; }
 
 
 .logo-200 {
@@ -17,6 +43,14 @@ p.title-p-1 { font-size: 24px; font-weight: 100; line-height: 28px; }
 .logo-text-60 {
     width: 60%;
 }
+
+.logo-text-55 {
+    width: 55%;
+}
+
+
+.padding-top-20 { padding-top: 20px; }
+.padding-top-30 { padding-top: 30px; }
 
 /* Topbar */
 .topbar {
@@ -98,12 +132,16 @@ nav .brand-logo {
 }
 
 .parallax-container {
-  min-height: 380px;
+  min-height: 400px;
   line-height: 0;
-  height: auto;
+  /*height: auto;*/
 }
 .parallax-container .section {
 width: 100%;
+}
+
+.parallax-access {
+    background-size: cover;
 }
 
 .title-header-1 {
@@ -132,8 +170,56 @@ width: 100%;
     text-align: center;
 }
 
+section {
+    width: 100%;
+    min-height: 100%;
+    padding: 50px 0 50px 0;
+    margin: 0;
+}
+
+section.pre-footer {
+    min-height: 235px;
+    /*padding: 20px;*/
+    margin: 0;
+    bottom: 0;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    margin: 0;
+    background: #1e1e1e;
+    text-align: center;
+}
+
+img.footer-logo {
+    padding: 0;
+    margin: 0;
+}
+
+.copyright {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+.copyright a {
+    font-size: 15px;
+    /*color: #b9b9b9;*/
+    font-weight: 300;
+    text-decoration: none;
+}
+/* Footer */
+
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
+    min-height: 200px;
     position: absolute;
     top: 40%;
   }
@@ -153,35 +239,4 @@ width: 100%;
 }
 .icon-block .material-icons {
   font-size: inherit;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    background: #1e1e1e;
-    padding: 20px 0 0 0;
-}
-
-img.footer-logo {
-    padding: 0;
-    margin: 0;
-}
-
-.page-footer {
-  margin: 0;
-}
-
-
-.copyright {
-    font-size: 15px;
-    font-weight: 300;
-    margin: 0;
-    padding: 0;
-}
-
-.copyright a {
-    font-size: 15px;
-    /*color: #b9b9b9;*/
-    font-weight: 300;
-    text-decoration: none;
 }
