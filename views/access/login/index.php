@@ -28,40 +28,78 @@
         <link href="<?Php echo $vParamsViewFrontEndLayout['root_frontend_css']; ?>style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>    
+    <section class="parallax-access">
+        <center>
+            <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-dark.svg" />
+            <h5 class="indigo-text">Por favor, ingresa con tus datos.</h5>
+            <div class="section"></div>
+
+            <div class="container">
+                <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE;">
+
+                    <form class="col s12" method="post">
+                        <div class='row'>
+                            <div class='col s12'>
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class='input-field col s12'>
+                                <input class='validate' type='email' name='email' id='email' />
+                                <label for='email'>Correo electrónico</label>
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class='input-field col s12'>
+                                <input class='validate' type='password' name='password' id='password' />
+                                <label for='password'>Contraseña</label>
+                            </div>
+                            <label style='float: right;'>
+                                <a class='pink-text' href='#!'><b>¿Olvidaste tú contraseña?</b></a>
+                            </label>
+                        </div>
+                        <br />
+                        <center>
+                            <div class='row'>
+                                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Ingresar</button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+            <a class="left-align" href="#!">Retornar al Inicio</a>
+            <a class="right-align" href="#!">Crear nueva cuenta</a>
+        </center>
+        <div class="parallax"><img src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>bg-login.jpg" alt=""></div>
+    </section>
+
+  <!--<section class="pre-footer grey darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="title-h5 white-text">¿Qué es Enlaceme.com?</h5>
+          <p class="title-p-2 weight100 white-text">Es una plataforma orientada al registro de personas que realizan actividades de trabajo de manera profesional o de oficio, para nuestra sociedad latinoamericana, la cual alberga grandes trabajadores.</p>
 
 
-  <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/1"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
         </div>
-      </li>
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/2"> <!-- random image -->
-        <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        <div class="col l3 s12">
+          <h5 class="white-text">Información</h5>
+          <ul>
+            <li><a class="link-1 white-text" href="#!">¿Como funciona?</a></li>
+            <li><a class="link-1 white-text" href="#!">¿Como registrarme?</a></li>
+          </ul>
         </div>
-      </li>
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/3"> <!-- random image -->
-        <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        <div class="col l3 s12">
+          <h5 class="white-text">Datos Legales</h5>
+          <ul>
+            <li><a class="link-1 white-text" href="#!">Políticas de Privacidad</a></li>
+            <li><a class="link-1 white-text" href="#!">Términos de Uso</a></li>
+          </ul>
         </div>
-      </li>
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/4"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>    
+      </div>
+    </div>
+</section>-->
 
 	<!-- BEGIN FOOTER -->
 	<footer class="footer-copyright grey darken-4">
