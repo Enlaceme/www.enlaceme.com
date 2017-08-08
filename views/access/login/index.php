@@ -30,48 +30,49 @@
 <body>    
     <section class="parallax-access">
         <center>
-            <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-dark.svg" />
-            <h5 class="indigo-text">Por favor, ingresa con tus datos.</h5>
+            <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" />
+            <h5 class="deep-orange-text">Por favor, ingresa con tus datos.</h5>
+            
             <div class="section"></div>
-
+            
             <div class="container">
                 <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE;">
 
                     <form class="col s12" method="post">
-                        <div class='row'>
-                            <div class='col s12'>
+                        <div class="row">
+                            <div class="col s12">
                             </div>
                         </div>
 
-                        <div class='row'>
-                            <div class='input-field col s12'>
-                                <input class='validate' type='email' name='email' id='email' />
-                                <label for='email'>Correo electrónico</label>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate" type="email" name="email" id="email" />
+                                <label class="grey-darken-text" for="email">Correo electrónico</label>
                             </div>
                         </div>
 
-                        <div class='row'>
-                            <div class='input-field col s12'>
-                                <input class='validate' type='password' name='password' id='password' />
-                                <label for='password'>Contraseña</label>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate" type="password" name="password" id="password" />
+                                <label class="grey-darken-text" for="password">Contraseña</label>
                             </div>
-                            <label style='float: right;'>
-                                <a class='pink-text' href='#!'><b>¿Olvidaste tú contraseña?</b></a>
+                            <label style="float: right;">
+                                <a class="brown-text" href="#!"><b>¿Olvidaste tú contraseña?</b></a>
                             </label>
                         </div>
                         <br />
                         <center>
-                            <div class='row'>
-                                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Ingresar</button>
+                            <div class="row">
+                                <button type="submit" name="btn_login" class="col s12 btn btn-large waves-effect deep-orange">Ingresar</button>
                             </div>
                         </center>
                     </form>
                 </div>
             </div>
-            <a class="left-align" href="#!">Retornar al Inicio</a>
-            <a class="right-align" href="#!">Crear nueva cuenta</a>
+            <a class="btn btn-small brown lighten-3" href="<?Php echo BASE_VIEW_URL; ?>">Inicio</a>
+            <a class="btn btn-small deep-orange" href="#!">Crear nueva cuenta</a>
         </center>
-        <div class="parallax"><img src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>bg-login.jpg" alt=""></div>
+        <div class="parallax"><img class="full-bg-1" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>bg-login.jpg" alt=""></div>
     </section>
 
   <!--<section class="pre-footer grey darken-3">
@@ -105,11 +106,10 @@
 	<footer class="footer-copyright grey darken-4">
         <div class="container">
             <img class="footer-logo logo-200" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" alt="Logotipo Enlaceme.com">
-            <p class="copyright">2017 Copyright &copy; Derechos reservados <a class="footer-link-1 grey-text" href="http://www.ideas-envision.com" target="_blank">Ideas-Envision Servicios Integrales</a></p>
+            <p class="copyright grey-text">2017 Copyright &copy; Derechos reservados <a class="footer-link-1 deep-orange-text" href="http://www.ideas-envision.com" target="_blank">Ideas-Envision Servicios Integrales</a></p>
         </div>
 	</footer>
-	<!-- END FOOTER -->      
-
+	<!-- END FOOTER -->
 
     <!--  Scripts-->
     <script type="text/javascript" src="<?Php echo $vParamsViewBackEndLayout['root_backend_global_plugins']; ?>jquery-3.2.1.min.js"></script>
