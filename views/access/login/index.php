@@ -24,8 +24,9 @@
         
         <link href='http://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700' rel='stylesheet' type='text/css'>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="<?Php echo $vParamsViewMaterialize['root_materialize_css']; ?>materialize.min.css"  media="screen,projection"/>
+        <link href="<?Php echo $vParamsViewMaterialize['root_materialize_css']; ?>materialize.min.css" media="screen,projection" type="text/css" rel="stylesheet"/>
         <link href="<?Php echo $vParamsViewFrontEndLayout['root_frontend_css']; ?>style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="<?Php echo $vParamsViewBackEndLayout['root_backend_global_plugins']; ?>font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>    
     <section class="parallax-access">
@@ -63,7 +64,15 @@
                         <br />
                         <center>
                             <div class="row">
-                                <button type="submit" name="btn_login" class="col s12 btn btn-large waves-effect deep-orange">Ingresar</button>
+                                <button type="submit" name="btn_login" class="col s12 btn waves-effect deep-orange">Ingresar</button>
+                            </div>
+                            <div class="row">
+                                <button type="submit" name="btn_loginfacebook" class="col s6 l6 btn waves-effect light-blue darken-4">
+                                    <i class="fa fa-facebook-official left"></i>Facebook
+                                </button>
+                                <button type="submit" name="btn_logingoogle" class="col l6 s6 btn waves-effect red darken-4">
+                                    <i class="fa fa-google-plus-official left"></i>Google
+                                </button>
                             </div>
                         </center>
                     </form>
