@@ -33,15 +33,13 @@
             <div class="nav-wrapper container">
                 <a href="#!" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="270px"></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="<?Php echo BASE_VIEW_URL;?>login">Ingresar</a></li>
-                    <li><a href="#">Registrarme</a></li>
-                    <li><a href="#">Información</a></li>
+                    <li><a href="<?Php echo BASE_VIEW_URL;?>access">Acceder</a></li>
+                    <li><a href="#">Más Información</a></li>
                 </ul>
 
                 <ul id="slide-out" class="side-nav">
-                    <li><a href="<?Php echo BASE_VIEW_URL;?>login">Ingresar</a></li>
-                    <li><a href="#">Registrarme</a></li>
-                    <li><a href="#">Información</a></li>
+                    <li><a href="<?Php echo BASE_VIEW_URL;?>access">Acceder</a></li>
+                    <li><a href="#">Más Información</a></li>
                 </ul>
 
                 <!--<ul id="slide-out" class="side-nav">

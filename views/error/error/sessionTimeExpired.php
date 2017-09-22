@@ -7,18 +7,19 @@
         <link rel="stylesheet" href="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_css']; ?>error.min.css" />
     </head>
     <body>
-        <div class="container text-center">
+        <div class="container text-center" id="error">
           <div class="row">
             <div class="col-md-12">
                 <div class="logo">
                     <img class="logo" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo.svg"/>
                 </div>
-                <h1 class="error-red">¡UPS - No hay controlador!</h1>
-                <p class="lead"><strong>Terrible error</strong>, creo que lo estamos <strong>arreglando</strong>,</p>
-                <p class="lead">vuelve en unas horas más, seguro lo resolveremos.</p>
+                <h1 class="error-red">¡UPS!</h1>
+                <p class="lead">El <strong>tiempo</strong> de la sesión a <strong>expirado</strong>, por tu seguridad.</p>
+                <p class="lead">por favor, vuelve a ingresar tus datos de <strong>acceso</strong>,</p>
                 <p class="lead">¡Gracias!</p>
                 <div id="nav_iden_menu">
                     <ul>
+                        <li><a href="<?php echo BASE_VIEW_URL; ?>access">Ingreso al sistema</a></li>
                         <li><a href="<?php echo BASE_VIEW_URL; ?>">Inicio</a></li>
                         <li><a href="<?php echo BASE_VIEW_URL; ?>documentation">Documentación</a></li>
                         <li><a href="<?php echo BASE_VIEW_URL; ?>contact">Contacto</a></li>

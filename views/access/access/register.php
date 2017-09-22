@@ -32,54 +32,58 @@
     <section class="parallax-access">
         <center>
             <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" />
-            <h5 class="deep-orange-text">Por favor, ingresa con tus datos.</h5>
+            <h5 class="deep-orange-text">Por favor, registra tu información.</h5>
             
             <div class="section"></div>
             
             <div class="container">
-                <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE;">
-
-                    <form class="col s12" method="post">
+                <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE;">                    
+                    <form class="col s12" method="post" id="access-form-register">
                         <div class="row">
-                            <div class="col s12">
+                            <div class="input-field col s12">
+                                <input class="validate" type="text" name="vName" id="vName" />
+                                <label class="grey-darken-text">Nombres</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate" type="text" name="vLastNames" id="vLastNames" />
+                                <label class="grey-darken-text">Apellidos</label>
+                            </div>
+                        </div>                        
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate" type="email" name="vEmail" id="vEmail" />
+                                <label class="grey-darken-text">Correo electrónico</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <input class="validate" type="email" name="email" id="email" />
-                                <label class="grey-darken-text" for="email">Correo electrónico</label>
+                                <input class="validate" type="password" name="vPassword" id="vPassword" placeholder="Contraseña" />
+                                <label class="grey-darken-text">Contraseña</label>
                             </div>
                         </div>
-
+                        
                         <div class="row">
                             <div class="input-field col s12">
-                                <input class="validate" type="password" name="password" id="password" />
-                                <label class="grey-darken-text" for="password">Contraseña</label>
+                                <input class="validate" type="password" name="vRePassword" id="vRePassword" placeholder="Contraseña" />
+                                <label class="grey-darken-text">Repetir Contraseña</label>
                             </div>
-                            <label style="float: right;">
-                                <a class="brown-text" href="#!"><b>¿Olvidaste tú contraseña?</b></a>
-                            </label>
-                        </div>
+                        </div>                        
                         <br />
                         <center>
                             <div class="row">
-                                <button type="submit" name="btn_login" class="col s12 btn waves-effect deep-orange">Ingresar</button>
-                            </div>
-                            <div class="row">
-                                <button type="submit" name="btn_loginfacebook" class="col s6 l6 btn waves-effect light-blue darken-4">
-                                    <i class="fa fa-facebook-official left"></i>Facebook
-                                </button>
-                                <button type="submit" name="btn_logingoogle" class="col l6 s6 btn waves-effect red darken-4">
-                                    <i class="fa fa-google-plus-official left"></i>Google
-                                </button>
+                                <button type="submit" class="col s12 btn waves-effect deep-orange" id="btnRegister">Registrarme</button>
                             </div>
                         </center>
                     </form>
                 </div>
             </div>
             <a class="btn btn-small brown lighten-3" href="<?Php echo BASE_VIEW_URL; ?>">Inicio</a>
-            <a class="btn btn-small deep-orange" href="#!">Crear nueva cuenta</a>
+            <a class="btn btn-small deep-orange" href="<?php echo BASE_VIEW_URL; ?>access/">Ya tengo cuenta, acceder</a>
         </center>
         <div class="parallax"><img class="full-bg-1" src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_img']; ?>bg-login.jpg" alt=""></div>
     </section>
@@ -123,7 +127,10 @@
     <!--  Scripts-->
     <script type="text/javascript" src="<?Php echo $vParamsViewBackEndLayout['root_backend_global_plugins']; ?>jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<?Php echo $vParamsViewMaterialize['root_materialize_js']; ?>materialize.min.js"></script>    
+    
     <script src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_js']; ?>init.js"></script>
+    
+    <script src="<?Php echo $vParamsViewBackEndLayout['root_backend_pages_scripts']; ?>access.min.js"></script>
     <!-- GoogleAnalytic -->  
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
