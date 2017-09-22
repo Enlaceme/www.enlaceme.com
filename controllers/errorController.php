@@ -3,19 +3,23 @@
 class errorController extends IdEnController
 	{		
 		public function __construct(){
-                parent::__construct();
+                parent::__construct();     
 			}
 			
 		public function index(){
-            $this->vView->visualizar('index');
+            $this->vView->visualize('index');
 			}
         
 		public function controller(){
-            $this->vView->visualizar('controller');
+            $this->vView->visualize('controller');
 			}
 
 		public function view(){
-            $this->vView->visualizar('view');
-			}        
+            $this->vView->visualize('view');
+			} 
+    
+		public function sessionTimeExpired(){
+            $this->vView->visualize('sessionTimeExpired');
+			}     
 	}
 ?>

@@ -2,35 +2,96 @@
 
 class profileController extends IdEnController
 	{		
-		public function __construct()
-			{
+		public function __construct(){
+            
 				parent::__construct();
-
-                $this->vImagesData = $this->LoadModel('images');
+            
+                $this->vUsersData = $this->LoadModel('users');
                 $this->vProfileData = $this->LoadModel('profile');
-                $this->vProfessionsData = $this->LoadModel('professions');
-                
-                $this->vSearchData = $this->LoadModel('search');
-                
-                $this->vLoggedProfileImage = $this->vProfileData->getProfileCropImage(IdEnSession::getSession('vSessionActiveProfileCode'));
 			}    
     
-		public function index()
-			{
+		public function index(){
+            
 				/* BEGIN VALIDATION TIME SESSION USER */
-				if(IdEnSession::getSession('vAuthenticatedSocialNetworkEnlaceme'))
-					{
+				if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
 						IdEnSession::timeSession();
-						$this->redireccionar('profile/about/');
+						$this->redirect('profile/about/');
 					}
-				else if(!IdEnSession::getSession('vAuthenticatedSocialNetworkEnlaceme'))
-					{
-						$this->redireccionar('login');
+				else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+						$this->redirect('access');
 					}
                 /* END VALIDATION TIME SESSION USER */
 			}
+    
+		public function about($vProfileName = null){
+            
+                if($vProfileName == null){
+				    if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                        //echo 'Debe agarrar el usuario logueado!';
+                        $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                        $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
+					} else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+						$this->redirect('admin');
+					}
+                } else if($vProfileName != null){
+                    if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
+                        //echo 'el nombre '.$vProfileName.' existe!';
+                        $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                        $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
+                    } else {
+                        //echo 'el nombre '.$vProfileName.' no existe!';
+                        $this->redirect('admin');
+                    }
+                }
 
-		public function account()
+                $this->vView->vUserNamesComplete = $this->vUsersData->getUserNamesComplete($this->vUserCode);
+                $this->vView->vUserEmail = $this->vUsersData->getUserEmailFromUserCode($this->vUserCode);            
+                $this->vView->vProfileCode = $this->vProfileCode;
+                $this->vView->visualize('about');
+            }
+    
+		public function account(){
+				
+                /* BEGIN VALIDATION TIME SESSION USER */
+				if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+						IdEnSession::timeSession();	
+				} else {
+                    $this->redirect('access');
+                }
+                /* END VALIDATION TIME SESSION USER */
+            
+                $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);            
+
+                $this->vView->vUserOtherName = $this->vUsersData->getUserOtherNameFromUserCode($this->vUserCode);
+                $this->vView->vUserDescription = $this->vUsersData->getUserDescriptionFromUserCode($this->vUserCode);
+                $this->vView->vUserNames = ucwords($this->vUsersData->getUserNamesFromUserCode($this->vUserCode));
+                $this->vView->vUserLastNames = ucwords($this->vUsersData->getUserLastNamesFromUserCode($this->vUserCode));            
+                $this->vView->vUserEmail = $this->vUsersData->getUserEmailFromUserCode($this->vUserCode);
+                $this->vView->vUserDateCreate = date_format(date_create($this->vUsersData->getUserDateCreateFromUserCode($this->vUserCode)), 'd/m/Y H:m:s');
+                
+                if($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode) == null){
+                    $this->vView->vUserDateBirth = '';
+                } else {
+                    $this->vView->vUserDateBirth = date_format(date_create($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode)), 'd/m/Y');
+                }
+                
+                $this->vView->vUserCountry = ucwords($this->vUsersData->getUserCountryFromUserCode($this->vUserCode));
+                $this->vView->vUserCity = ucwords($this->vUsersData->getUserCityFromUserCode($this->vUserCode));
+            
+                $this->vView->vUserNamesCompleteMenu = $this->vUsersData->getUserNamesComplete(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'));
+                $this->vView->vUserCode = $this->vUserCode;
+                $this->vView->vUserEmailMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+            
+                $this->vView->visualize('account');
+            }    
+/*******************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
+		public function account2()
 			{
 				/* BEGIN VALIDATION TIME SESSION USER */
 				if(IdEnSession::getSession('vAuthenticatedSocialNetworkEnlaceme')){
@@ -71,7 +132,7 @@ class profileController extends IdEnController
                 $this->vView->vProfileActualLocationCode = $this->vProfileData->getProfileActualLocationCode($this->vProfileCode);
                 $this->vView->vProfileActualLocation = $this->vProfileData->getProfileActualLocation($this->vProfileCode);
                 
-				$this->vView->visualizar('account');
+				$this->vView->visualize('account');
 			}
         
 		public function cropimage()
@@ -90,10 +151,10 @@ class profileController extends IdEnController
                 $this->vView->vLoggedProfileCodeImage = $this->vProfileData->getProfileCodeImage(IdEnSession::getSession('vSessionActiveProfileCode'));
                 $this->vView->vLoggedProfileCropImage = $this->vProfileData->getProfileCropImage(IdEnSession::getSession('vSessionActiveProfileCode'));
                 
-                $this->vView->visualizar('cropimage');
+                $this->vView->visualize('cropimage');
 			}        
         
-		public function about($vProfileNameURL = null)
+		public function about2($vProfileNameURL = null)
 			{
 				/* BEGIN VALIDATION TIME SESSION USER */
 				if(IdEnSession::getSession('vAuthenticatedSocialNetworkEnlaceme'))
@@ -138,7 +199,7 @@ class profileController extends IdEnController
                 $this->vView->vProfileDescription = $this->vProfileData->getProfileDescription($vProfileCode);
                 $this->vView->vProfilePortfolioImages = $this->vProfileData->getProfilePortfolioImages($vProfileCode);    
                 
-				$this->vView->visualizar('about');
+				$this->vView->visualize('about');
 			}
         
 		public function portfolio($vProfileNameURL = null)
@@ -187,7 +248,7 @@ class profileController extends IdEnController
                 $this->vView->vProfileDescription = $this->vProfileData->getProfileDescription($vProfileCode);
                 $this->vView->vProfilePortfolioImages = $this->vProfileData->getProfilePortfolioImages($vProfileCode);
                 
-				$this->vView->visualizar('portfolio');
+				$this->vView->visualize('portfolio');
 			}       
         
 		public function regProfileImage(){
