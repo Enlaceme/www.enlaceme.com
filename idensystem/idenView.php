@@ -14,7 +14,7 @@ class IdEnView  extends IdEnController
 			
 		public function index(){}
 			
-		public function visualizar($vNameView, $vItem = FALSE)
+		public function visualize($vNameView, $vItem = FALSE)
 			{
 
 				$vParamsViewMaterialize = array(
@@ -22,6 +22,10 @@ class IdEnView  extends IdEnController
                                         'root_materialize_fonts'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/materialize/fonts/',
                                         'root_materialize_js'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/materialize/js/'
 									 );
+            
+				$vParamsViewProfile = array(
+                                        'root_profile_resources_img'=>BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/'
+									 );            
                 
 				$vParamsViewFrontEndLayout = array(
                                         'root_frontend_menu_array'=>$arrayTotalMenu,

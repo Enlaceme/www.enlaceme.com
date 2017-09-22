@@ -57,6 +57,21 @@ abstract class IdEnController
 						exit;						
 					}
 			}
+    
+        /* BEGIN VALIDADORES EN FUNCIONES GLOBALES - PÚBLICAS */    
+        public function isValidEmail($str){
+          $matches = null;
+          return (1 === preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $str, $matches));
+        }
+    
+        public function isPasswordStrenght($password){   
+            if(preg_match("/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/", $password)){
+                echo true;  
+            } else {
+                echo false;                
+            }
+        }     
+        /* END VALIDADORES EN FUNCIONES GLOBALES - PÚBLICAS */    
 						
 	}
 

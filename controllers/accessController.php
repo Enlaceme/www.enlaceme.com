@@ -147,9 +147,9 @@ class accessController extends IdEnController
                                             $this->vMail = new PHPMailer();								
                                             //$this->vMail->IsSMTP();
                                             $this->vMail->SMTPAuth = true;
-                                            $this->vMail->Host = '*****';
-                                            $this->vMail->Username = '*****';
-                                            $this->vMail->Password = '*****';
+                                            $this->vMail->Host = 'smtp.enlaceme.com';
+                                            $this->vMail->Username = 'info@enlaceme.com';
+                                            $this->vMail->Password = '@3nl4c3m3_infomail';
                                             $this->vMail->SMTPSecure = 'ssl';
                                             $this->vMail->Port = 25;
                                             $this->vMail->SetFrom('info@enlaceme.com', 'Red Social Enlaceme.com');
@@ -206,9 +206,9 @@ class accessController extends IdEnController
                                 $this->vMail = new PHPMailer();								
                                 //$this->vMail->IsSMTP();
                                 $this->vMail->SMTPAuth = true;
-                                $this->vMail->Host = '*****';
-                                $this->vMail->Username = '*****';
-                                $this->vMail->Password = '*****';
+                                $this->vMail->Host = 'smtp.enlaceme.com';
+                                $this->vMail->Username = 'info@enlaceme.com';
+                                $this->vMail->Password = '@3nl4c3m3_infomail';
                                 $this->vMail->SMTPSecure = 'ssl';
                                 $this->vMail->Port = 25;
                                 $this->vMail->SetFrom('info@enlaceme.com', 'Red Social Enlaceme.com');
