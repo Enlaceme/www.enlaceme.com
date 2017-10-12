@@ -6,7 +6,9 @@ class actionprofileController extends IdEnController
                 parent::__construct();
             
                 $this->vUsersData = $this->LoadModel('users');
-                $this->vProfileData = $this->LoadModel('profile');            
+                $this->vProfileData = $this->LoadModel('profile');
+                $this->vProfessionData = $this->LoadModel('profession');
+                
 			}
 			
 		public function index(){
@@ -16,7 +18,6 @@ class actionprofileController extends IdEnController
 		public function actionAccountData(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
-                $vUserCode = (int) $_POST['vUserCode'];
                 $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
                 
                 $vUserOtherName = (string) strtolower($_POST['vUserOtherName']);
@@ -33,7 +34,8 @@ class actionprofileController extends IdEnController
                 $this->vUserNames = $this->vUsersData->getUserNamesFromUserCode($this->vUserCode);
                 $this->vUserLastNames = $this->vUsersData->getUserLastNamesFromUserCode($this->vUserCode);            
                 $this->vUserEmail = $this->vUsersData->getUserEmailFromUserCode($this->vUserCode);
-                $this->vUserDateBirth = date_format(date_create($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode)), 'd/m/Y');
+                //$this->vUserDateBirth = date_format(date_create($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode)), 'Y/m/d');
+                $this->vUserDateBirth = $this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode);
                 $this->vUserCountry = $this->vUsersData->getUserCountryFromUserCode($this->vUserCode);
                 $this->vUserCity = $this->vUsersData->getUserCityFromUserCode($this->vUserCode);
                 
@@ -53,24 +55,165 @@ class actionprofileController extends IdEnController
                     $this->vUsersData->updateUserEmail($this->vUserCode, $vUserEmail);
                 }
                 
-                /*if($vUserDateBirth != $this->vUserDateBirth){
-                    
+                if($vUserDateBirth != $this->vUserDateBirth){
+                    $this->vUsersData->updateUserBirthDate($this->vUserCode, $vUserDateBirth);
                 }
                 
                 if($vUserCountry != $this->vUserCountry){
-                    
+                    $this->vUsersData->updateUserCountry($this->vUserCode, $vUserCountry);   
                 }
                 
                 if($vUserCity != $this->vUserCity){
-                    
+                    $this->vUsersData->updateUserCity($this->vUserCode, $vUserCity);
                 }
                 
                 if($vUserDescription != $this->vUserDescription){
-                    
-                }*/                
+                    $this->vUsersData->updateUserDescription($this->vUserCode, $vUserDescription);
+                }
                 
                 //echo 'Estamos aqui';
             }
+        }
+    
+		public function actionProfileData(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vProfileDescription = (string) strtolower($_POST['vProfileDescription']);
+                
+                $this->vProfileDescriptionExists = $this->vProfileData->getProfileDescriptionExists($this->vProfileCode);
+                
+                if($this->vProfileDescriptionExists == 0){
+                    $this->vProfileData->insertProfileDescription($this->vProfileCode, $vProfileDescription);                    
+                } else {
+                    $this->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                    if($vProfileDescription != $this->vProfileDescription){
+                        $this->vProfileData->updateProfileDescription($this->vProfileCode, $vProfileDescription);
+
+                    }                    
+                }
+                
+                //echo 'Estamos aqui';
+            }
+        }
+    
+		public function newProjectProfile(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vProjectName = (string) strtolower($_POST['vProjectName']);
+                
+                $this->vProjectNameExists = $this->vProfileData->getProjectProfileNameExists($vProjectName);
+                
+                if($this->vProjectNameExists == 0){
+                    $this->vProfileProjectCode = $this->vProfileData->insertProjectProfile($this->vProfileCode, $vProjectName, 0);
+                    echo $this->vProfileProjectCode;
+                }
+                
+                //echo 'Estamos aqui';
+            }
+        }    
+    
+		public function actionProfessionData(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vProfessionCode = (int) $_POST['vProfessionCode'];
+                
+                $vProfessionName = (string) strtolower($_POST['vNewProfession']);
+                
+                if($vProfessionCode != 0){
+                    if($this->vProfileData->getProfileProfessionExists($this->vProfileCode, $vProfessionCode) == 0){
+                        $this->vProfileData->insertProfileProfession($this->vProfileCode, $vProfessionCode);
+                    }
+                } else if($vProfessionCode == 0){
+                    if($vProfessionName != '' && $vProfessionName != null){
+                        if($this->vProfessionData->getProfessionExists($vProfessionName) == 0){
+                            $vProfessionCode = $this->vProfessionData->insertProfession($vProfessionName, $vProfessionDescription);
+                            $this->vProfileData->insertProfileProfession($this->vProfileCode, $vProfessionCode);
+                        }
+                        
+                    }
+                    
+                }
+                /*$this->vProfileDescriptionExists = $this->vProfileData->getProfileDescriptionExists($this->vProfileCode);
+                
+                if($this->vProfileDescriptionExists == 0){
+                    $this->vProfileData->insertProfileDescription($this->vProfileCode, $vProfileDescription);
+                } else {
+                    $this->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                    if($vProfileDescription != $this->vProfileDescription){
+                        $this->vProfileData->updateProfileDescription($this->vProfileCode, $vProfileDescription);
+
+                    }                    
+                }*/
+                
+                //echo 'Estamos aqui';
+            }
+        }
+    
+		public function actionUploadProfileImg(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vImageProfileRoot = ROOT_APPLICATION.'views'.DIR_SEPARATOR.'layout'.DIR_SEPARATOR.DEFAULT_VIEW_LAYOUT.DIR_SEPARATOR.'backend'.DIR_SEPARATOR.'resources'.DIR_SEPARATOR.'img'.DIR_SEPARATOR.$this->vProfileCode.DIR_SEPARATOR.'profile'.DIR_SEPARATOR;
+                
+                
+                
+                $allowed = array('png', 'jpg', 'gif');
+                
+                if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
+                    
+                    $vImageName = $_FILES['upl']['name'];
+                    $vImageType = pathinfo($_FILES['upl']['name'], PATHINFO_EXTENSION);
+                    $vImageSize = $_FILES['upl']['size'];
+                                          
+                    $vImageContent = addslashes(base64_encode(file_get_contents($_FILES['upl']['tmp_name'])));
+                    
+                    if(!get_magic_quotes_gpc()){
+                        $vImageName = addslashes($vImageName);
+                    }                   
+
+                    if(!in_array(strtolower($vImageType), $allowed)){
+                        echo '{"status":"error"}';
+                        exit;
+                    }
+                    
+                    if(move_uploaded_file($_FILES['upl']['tmp_name'], $vImageProfileRoot.$vImageName)){
+                        //echo '{"status":"success"}';
+                        $this->vImageCode = $this->vProfileData->insertImage($vImageName, $vImageContent, $vImageSize, $vImageType, 1);
+
+                        if(($this->vImageCode != 0) && ($this->vImageCode != '')){
+                            
+                            $this->vProfileImageCode = $this->vProfileData->insertProfileImage($this->vProfileCode, $this->vImageCode, 0);
+                            
+                            $this->vProfileData->updateProfileImageStatus($this->vProfileImageCode, $this->vProfileCode, 1);
+                        }
+                        exit;
+                    }
+                }
+
+                echo '{"status":"error"}';
+                exit;
+            }
+        }
+    
+        public function selectImageForProfile($vSelectedImageProfileCode = 0){
+            
+            $vSelectedImageProfileCode = (int) $vSelectedImageProfileCode;
+            $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'),1);
+            $this->vProfileImageCode = $this->vProfileData->getProfileImageCode($this->vProfileCode);
+                                                                                  
+            $this->vProfileData->updateProfileImageStatus($this->vProfileImageCode, $this->vProfileCode, 0);
+            
+            $this->vProfileData->updateProfileImageStatus($vSelectedImageProfileCode, $this->vProfileCode, 1);
+            
+            $this->redirect('profile/accountprofileimage');
+
         }
 	}
 ?>

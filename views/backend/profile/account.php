@@ -1,144 +1,215 @@
     <div class="container">
+        
         <div class="row">
-            
             <div class="col s12 m12 l12">
                 <h2 class="title-h2 thin-text deep-orange-text">Configuración de la cuenta</h2>
             </div>
-            
-            <div class="col s12 m3 l3">
-                <div class="card">
-                    <div class="card-image">
-                        <img class="responsive-img" src="<?Php echo $vParamsViewProfile['root_profile_resources_img']; ?>men-profile.jpg">
-                        <span class="card-title">Imagen Perfil</span>
-                    </div>
-                    <div class="card-action">
-                        <input type="submit" class="waves-effect waves-light btn deep-orange" value="Cambiar">
-                    </div>
-                </div>                
-            </div>
-            
-            <div class="col s12 m9 l9">
-                <form class="col s12 m12 l12" method="post" id="form-accountdata">
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 class="title-h3 thin-text deep-orange-text">Información Principal</h3>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input type="text" name="vUserOtherName" id="vUserOtherName" value="<?Php echo $this->vUserOtherName; ?>">
-                                    <label>Nombre del perfil</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <p class="grey-text"><strong>Nombre perfil</strong> este nombre será visible de forma pública, además te permitirá ser único en la plataforma.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input type="text" name="vUserNames" id="vUserNames" value="<?Php echo $this->vUserNames; ?>">
-                                    <label>Nombres</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input type="text" name="vUserLastNames" id="vUserLastNames" value="<?Php echo $this->vUserLastNames; ?>">
-                                    <label>Apellidos</label>
-                                </div>
-                            </div>                            
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input type="text" name="vUserEmail" id="vUserEmail" value="<?Php echo $this->vUserEmail; ?>">
-                                    <label>Correo electrónico</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input type="text" value="<?Php echo $this->vUserDateCreate; ?>" disabled>
-                                    <label>Fecha de creación de cuenta</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s6">
-                                    <label>Fecha de Nacimiento</label>
-                                    <input type="text" name="vUserDateBirth" id="datepicker" class="datepicker" value="<?Php echo $this->vUserDateBirth; ?>">
-                                </div>
-                                <div class="input-field col s6">
-                                    <p class="grey-text"><strong>Fecha de nacimiento:</strong> Este dato no es primordial para el perfil, pero si puede considerarse como un punto a favor como dato informativo.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <label>País de Nacimiento</label>
-                                    <input type="text" name="vUserCountry" id="vUserCountry" value="<?Php echo $this->vUserCountry; ?>">
-                                </div>                                
-                                <div class="input-field col s6">
-                                    <label>Ciudad de Nacimiento</label>
-                                    <input type="text" name="vUserCity" id="vUserCity" value="<?Php echo $this->vUserCity; ?>">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="textarea1" class="materialize-textarea" name="vUserDescription" id="vUserDescription"><?Php echo $this->vUserDescription; ?></textarea>
-                                  <label for="textarea1">Descripción Personal</label>
-                                </div>                                
-                            </div>                            
-                        </div>
-                        <div class="card-action">
-                            <input type="hidden" name="vUserCode" id="vUserCode" value="<?Php echo $this->vUserCode; ?>">
-                            <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
-                        </div>
-                    </div>
-                </form>
-            </div>            
         </div>
         
         <div class="row">
-
-            <div class="col s12 m6 l6">
-                <form class="col s12 m12 l12" method="post" id="form-accountdata2">
+            <div class="col s12 m12 l12">
+                
+                <div class="col s12 m3 l3">
+                    
                     <div class="card">
-                        <div class="card-content">
-                            <h3 class="title-h3 thin-text deep-orange-text">Información Principal</h3>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input type="text" class="validate">
-                                    <label>Nombre del perfil</label>
+                        <ul class="collection menu">
+                            <li class="collection-item menu deep-orange" id="activeSectionImageProfile"><a href="javascript();" class="white-text">Imagen Perfil</a></li>
+                            <li class="collection-item menu deep-orange" id="activeSectionAccount"><a href="javascript();" class="white-text">Datos de Cuenta</a></li>
+                            <li class="collection-item deep-orange" id="activeSectionProfession"><a href="javascript();" class="white-text">Profesión, Trabajo u oficio</a></li>
+                            <li class="collection-item deep-orange" id="activeSectionProjects"><a href="javascript();" class="white-text">Proyectos</a></li>
+                        </ul>
+                    </div>
+                                       
+                </div>
+                
+                <div class="col s12 m9 l9">
+
+                    
+                    <div class="col s12 m4 l4" id="sectionImageProfile">
+                        <div class="card">
+                            <div class="card-image">
+                                <?Php echo $this->vImageProfile; ?>
+                            </div>
+                            <div class="card-action">
+                                <a href="<?Php echo  BASE_VIEW_URL.'profile/accountprofileimage'; ?>" class="waves-effect waves-light btn deep-orange">Cambiar</a>
+                            </div>                    
+                        </div>                
+                    </div>
+                    
+                    <div class="col s12 m12 l12" id="sectionAccount">
+                        <form method="post" id="form-accountdata">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h3 class="title-h3 thin-text deep-orange-text">Información Principal</h3>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" name="vUserOtherName" id="vUserOtherName" value="<?Php echo $this->vUserOtherName; ?>">
+                                            <label>Nombre del perfil</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <p class="grey-text"><strong>Nombre perfil</strong> este nombre será visible de forma pública, además te permitirá ser único en la plataforma.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" name="vUserNames" id="vUserNames" value="<?Php echo $this->vUserNames; ?>">
+                                            <label>Nombres</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input type="text" name="vUserLastNames" id="vUserLastNames" value="<?Php echo $this->vUserLastNames; ?>">
+                                            <label>Apellidos</label>
+                                        </div>
+                                    </div>                            
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" name="vUserEmail" id="vUserEmail" value="<?Php echo $this->vUserEmail; ?>">
+                                            <label>Correo electrónico</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input type="text" value="<?Php echo $this->vUserDateCreate; ?>" disabled>
+                                            <label>Fecha de creación de cuenta</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <label>Fecha de Nacimiento</label>
+                                            <input type="text" name="vUserDateBirth" id="datepicker" class="datepicker" value="<?Php echo $this->vUserDateBirth; ?>">
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <p class="grey-text"><strong>Fecha de nacimiento:</strong> Este dato no es primordial para el perfil, pero si puede considerarse como un punto a favor como dato informativo.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <label>País de Nacimiento</label>
+                                            <input type="text" name="vUserCountry" id="vUserCountry" value="<?Php echo $this->vUserCountry; ?>">
+                                        </div>                                
+                                        <div class="input-field col s6">
+                                            <label>Ciudad de Nacimiento</label>
+                                            <input type="text" name="vUserCity" id="vUserCity" value="<?Php echo $this->vUserCity; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                          <textarea class="materialize-textarea" name="vUserDescription" id="vUserDescription"><?Php echo $this->vUserDescription; ?></textarea>
+                                          <label>Descripción Personal</label>
+                                        </div>                                
+                                    </div>                            
                                 </div>
-                                <div class="input-field col s6">
-                                    <p class="grey-text"><strong>Nombre perfil</strong> este nombre será visible de forma pública, además te permitirá ser único en la plataforma.</p>
+                                <div class="card-action">
+                                    <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="first_name" type="text" class="validate">
-                                    <label>Nombres</label>
+                        </form>
+                    </div>
+                    
+                    <div id="sectionProfession">
+                    
+                        <div class="col s12 m12 l12">
+                            <form method="post" id="form-professiondata">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h3 class="title-h3 thin-text deep-orange-text">Información Profesional o de Trabajo</h3>
+                                        <div class="row">
+                                            <div class="col s12">
+                                            <?php 
+                                                if(isset($this->vUserProfessions) && count($this->vUserProfessions)){
+                                                    for($i=0;$i<count($this->vUserProfessions);$i++){
+                                                        echo '<div class="chip">'.$this->vUserProfessions[$i]['c_profession_name'].'
+                                                                <i class="close material-icons" id="chip-professions-'.$this->vUserProfessions[$i]['n_codprofileprofession'].'" code="'.$this->vUserProfessions[$i]['n_codprofileprofession'].'">close</i>
+                                                            </div>';
+                                                    }
+                                                }
+                                            ?>                                    
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <label>Seleccionar Profesión, oficio ó Trabajo</label>
+                                                <select class="browser-default" id="vProfessionCode" name="vProfessionCode">
+                                                    <option value="0">Seleccionar</option>
+                                                    <?php 
+                                                        if(isset($this->vProfessions) && count($this->vProfessions)){
+                                                            for($i=0;$i<count($this->vProfessions);$i++){
+                                                                echo '<option value="'.$this->vProfessions[$i]['n_codprofession'].'">'.$this->vProfessions[$i]['c_profession_name'].'</option>';
+                                                            }
+                                                        }
+                                                    ?>                                        
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <label>Escribir Profesión, oficio ó trabajo</label>
+                                                <input type="text" name="vNewProfession" id="vNewProfession" value="<?Php echo $this->vNewProfession; ?>">
+                                            </div>                              
+                                        </div> 
+                                    </div>
+                                    <div class="card-action">
+                                        <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
+                                    </div>
                                 </div>
-                                <div class="input-field col s6">
-                                    <input id="last_name" type="text" class="validate">
-                                    <label>Apellidos</label>
-                                </div>
-                            </div>                            
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="first_name" type="text" class="validate">
-                                    <label>Correo electrónico</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="last_name" type="text" class="validate">
-                                    <label>Contraseña</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input type="text" value="" disabled>
-                                    <label>Fecha de creación</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <p class="grey-text"><strong>Nombre perfil</strong> este nombre será visible de forma pública, además te permitirá ser único en la plataforma.</p>
-                                </div>
-                            </div>                            
+                            </form>
                         </div>
-                        <div class="card-action">
-                            <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
+
+                        <div class="col s12 m12 l12">
+                            <form method="post" id="form-profiledata">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h3 class="title-h3 thin-text deep-orange-text">Descripción Profesional o del Trabajo que realiza</h3>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                              <textarea class="materialize-textarea" name="vProfileDescription" id="vProfileDescription"><?Php echo $this->vProfileDescription; ?></textarea>
+                                              <label>Debes realizar una descripción de el trabajo que realizas.</label>
+                                            </div>                                
+                                        </div> 
+                                    </div>
+                                    <div class="card-action">
+                                        <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
-            </div>            
-        </div>        
+                    
+                    <div id="sectionProjects">
+                        <div class="col s12 m12 l12">
+                            <form method="post" id="form-projectdata">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h3 class="title-h3 thin-text deep-orange-text">Información de Proyectos</h3>
+                                        <div class="row">
+                                            <div class="input-field col s8">
+                                                <input type="text" name="vProjectName" id="vProjectName" value="">
+                                                <label>Nombre del Proyecto</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <input type="submit" class="waves-effect waves-light btn deep-orange" value="Nuevo">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="col s12 m4 l4">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="card-title">Nombre Proyecto</span>
+                                    <p>Breve descripción del proyecto que ha realizado.</p>
+                                </div>
+                                <a class="btn-floating halfway-fab waves-effect waves-light deep-orange"><i class="material-icons">check_circle</i></a>                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
     </div>
 
     <!-- BEGIN FOOTER -->
@@ -166,7 +237,10 @@
     <script type="text/javascript" src="<?Php echo $vParamsViewBackEndLayout['root_backend_global_plugins']; ?>jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<?Php echo $vParamsViewMaterialize['root_materialize_js']; ?>materialize.min.js"></script>    
     <script src="<?Php echo $vParamsViewFrontEndLayout['root_frontend_js']; ?>init.js"></script>
+
     <script src="<?Php echo $vParamsViewBackEndLayout['root_backend_pages_scripts']; ?>account.min.js"></script>
+    <script src="<?Php echo $vParamsViewBackEndLayout['root_backend_pages_scripts']; ?>menu.actions.min.js"></script>
+
     <!-- GoogleAnalytic -->  
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

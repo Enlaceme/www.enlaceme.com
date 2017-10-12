@@ -3,11 +3,19 @@
             <div class="col s12 m4 l3">
               <div class="card">
                 <div class="card-image">
-                  <img class="responsive-img" src="<?Php echo $vParamsViewProfile['root_profile_resources_img']; ?>men-profile.jpg">
+                    <?Php echo $this->vImageProfile; ?>
                 </div>
                 <div class="card-content">
                     <span class="card-title deep-orange-text"><?Php echo ucwords($this->vUserNamesComplete); ?></span>
-                    <p>Soñador, perseverante, exitoso: tres palabras que pueden definirme completamente, me considero desarrollador de nacimiento, me encanta la programación la creación de ideas nuevas y sobre todo me gusta mucho el Brainstorming!</p>
+                    <p>
+                        <?Php 
+                            if($this->vUserDescription == NULL){
+                                echo 'Este usuario no tiene una descripción personal, por favor sugierelé una.';
+                            } else {
+                                echo $this->vUserDescription;    
+                            }                        
+                        ?>
+                    </p>
                 </div>
                 <div class="card-action center-align">
                     <a href="#" class="waves-effect waves-light btn deep-orange">Contactar</a>
@@ -15,32 +23,67 @@
               </div>
             </div>
             
-            <div class="col s12 m9">
+            <div class="col s12 m9 l9">
                 
                 <div class="row">
-                    <div class="col s12 m6">
+                    <div class="col s12 m8 l8">
                         <div class="card">
                             <div class="card-content grey darken-4 lighten-4">
-                                <span class="card-title deep-orange-text">Ingeniero de Sistemas</span>
-                                <p class="white-text">Soy Ingeniero de Sistemas, especializado en la programación web, desarrollador de aplicaciónes web, sistemas web y sitios web a medida, tambien realizo imagen corporativa, diseño gráfico en general, y ultimamente me dedico al marketing digital en general.</p>
+                                <span class="card-title deep-orange-text">
+                                <?php 
+                                    if(isset($this->vProfileProfessions) && count($this->vProfileProfessions)){
+                                        for($i=0;$i<count($this->vProfileProfessions);$i++){
+                                            echo $this->vProfileProfessions[$i]['c_profession_name'];
+                                        }
+                                    } else {
+                                        echo 'Este usuario no ha registrado ninguna profesión, trabajo u oficio, por favor sugierelé una.';
+                                    }
+                                ?>                                    
+                                </span>
+                                <p class="white-text">
+                                    <?Php 
+                                        if($this->vProfileDescription == NULL){
+                                            echo 'Este usuario no ha realizado aún la descripción de su profesión, trabajo u oficio, por favor sugierelé una.';
+                                        } else {
+                                            echo $this->vProfileDescription;    
+                                        }                        
+                                    ?>                                    
+                                </p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col s12 m6">
-                        <div class="card">
+                        
+                        <!--<div class="card">
                             <ul class="collection">
-                                <li class="collection-item grey lighten-4">sergiom_malarcon@yahoo.com</li>
-                                <li class="collection-item grey lighten-4">34 años</li>
-                                <li class="collection-item grey lighten-4">La Paz</li>
-                                <li class="collection-item grey lighten-4">Bolivia</li>
+                                <li class="collection-item grey lighten-4"><?Php echo $this->vUserEmail; ?></li>
+                                <li class="collection-item grey lighten-4"><?Php echo $this->vUserDateBirth; ?></li>
+                                <li class="collection-item grey lighten-4"><?Php echo $this->vUserCountry; ?></li>
+                                <li class="collection-item grey lighten-4"><?Php echo $this->vUserCity; ?></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col s12 m6">
+                        
+                        <ul class="collapsible popout" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header"><span class="deep-orange-text">Áreas de Conocimiento</span></div>
+                                <div class="collapsible-body"><span>Las áreas de conocimiento describen de forma general los temas que la persona realiza. </span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Desarrollo Web</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Diseño Web</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>                            
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Diseño Gráfico</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Marketing Digital</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                        </ul>-->                        
+                        
                         <div class="card">
                             <div class="card-image">
                                 <div class="carousel carousel-slider center" data-indicators="true">
@@ -74,32 +117,11 @@
                             <div class="card-action">
                                 <a href="#">This is a link</a>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
-                    
-                    <div class="col s12 m6">
-                        <ul class="collapsible popout" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header"><span class="deep-orange-text">Áreas de Conocimiento</span></div>
-                                <div class="collapsible-body"><span>Las áreas de conocimiento describen de forma general los temas que la persona realiza. </span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Desarrollo Web</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Diseño Web</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                            </li>                            
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">place</i>Diseño Gráfico</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Marketing Digital</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                            </li>
-                        </ul>
+
+                    <div class="col s12 m4 l4">
+
                     </div>
                 </div>
                 

@@ -3,20 +3,26 @@
             <div class="col s12 m12 l12">
             </div>
             
-            <?php 
+            <?php             
                 if(isset($this->vProfilesActives) && count($this->vProfilesActives)){
                     for($i=0;$i<count($this->vProfilesActives);$i++){
-                        //$vImagePortfolio = 'data:image/jpeg;base64,'.$this->vProfilePortfolioImages[$i]['b_image_content'];
+                        
+                        if(!isset($this->vProfilesActives[$i]['b_image_content'])){
+                            $this->vImageProfile = '<img class="materialboxed responsive-img" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                        } else {
+                            $this->vImageProfile = '<img class="materialboxed responsive-img" src="data:image/jpeg;base64,'.$this->vProfilesActives[$i]['b_image_content'].'">';
+                        }                        
+                        
                         echo '
                             <div class="col s12 m3">
                                 <div class="card">
                                     <div class="card-image">
-                                        <img class="responsive-img" src="'.$vParamsViewProfile['root_profile_resources_img'].'men-profile.jpg">
-                                        <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">check_circle</i></a>
+                                        '.$this->vImageProfile.'                                        
+                                        <a class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">check_circle</i></a>
                                     </div>
                                     <div class="card-content">
                                         <span class="card-title">'.ucwords($this->vProfilesActives[$i]['c_names']).'</span>
-                                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                        <p>'.$this->cutLongText($this->vProfilesActives[$i]['c_profile_description'], 100).'</p>
                                     </div>
                                     <div class="card-action">
                                         <a href="'.BASE_VIEW_URL.'profile/about/'.$this->vProfilesActives[$i]['c_profilename'].'" class="deep-orange-text">Ver perfil</a>

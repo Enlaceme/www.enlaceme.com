@@ -52,3 +52,69 @@ CREATE TABLE `tb_enlaceme_profiles` (
   `d_datemod` datetime default NULL,
   PRIMARY KEY  (`n_codprofile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_professions` (
+  `n_codprofession` int(11) NOT NULL auto_increment,
+  `c_profession_name` text collate utf8_spanish_ci,
+  `c_profession_description` text collate utf8_spanish_ci,
+  `n_active` int(11) default NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datecreate` datetime default NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datemod` datetime default NULL,
+  PRIMARY KEY  (`n_codprofession`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_profileprofessions` (
+  `n_codprofileprofession` int(11) NOT NULL auto_increment,
+  `n_codprofile` int(11) default NULL,
+  `n_codprofession` int(11) default NULL,
+  `n_active` int(11) default NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datecreate` datetime default NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datemod` datetime default NULL,
+  PRIMARY KEY  (`n_codprofileprofession`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_profiledescription` (
+  `n_codprofiledescription` int(11) NOT NULL auto_increment,
+  `n_codprofile` int(11) default NULL,
+  `c_profile_description` text collate utf8_spanish_ci,
+  `n_active` int(11) default NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datecreate` datetime default NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datemod` datetime default NULL,
+  PRIMARY KEY  (`n_codprofiledescription`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_projects` (
+  `n_codproject` int(11) NOT NULL auto_increment,
+  `n_codprofile` int(11) default NULL,
+  `c_project_name` text collate utf8_spanish_ci,
+  `c_project_description` text collate utf8_spanish_ci,
+  `n_project_hours` int(11) default NULL,
+  `n_project_days` int(11) default NULL,
+  `n_project_months` int(11) default NULL,
+  `n_project_priceini` int(11) default NULL,
+  `n_project_priceend` int(11) default NULL,
+  `n_active` int(11) default NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datecreate` datetime default NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datemod` datetime default NULL,
+  PRIMARY KEY  (`n_codproject`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_projectimages` (
+  `n_codprojectimages` int(11) NOT NULL auto_increment,
+  `n_codproject` int(11) default NULL,
+  `n_codimage` int(11) NOT NULL,
+  `n_active` int(11) default NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datecreate` datetime default NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci NOT NULL,
+  `d_datemod` datetime default NULL,
+  PRIMARY KEY  (`n_codprojectimages`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

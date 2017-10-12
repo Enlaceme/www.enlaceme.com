@@ -8,6 +8,7 @@ class profileController extends IdEnController
             
                 $this->vUsersData = $this->LoadModel('users');
                 $this->vProfileData = $this->LoadModel('profile');
+                $this->vProfessionData = $this->LoadModel('profession');
 			}    
     
 		public function index(){
@@ -24,7 +25,6 @@ class profileController extends IdEnController
 			}
     
 		public function about($vProfileName = null){
-            
                 if($vProfileName == null){
 				    if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
                         //echo 'Debe agarrar el usuario logueado!';
@@ -33,7 +33,7 @@ class profileController extends IdEnController
 					} else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
 						$this->redirect('admin');
 					}
-                } else if($vProfileName != null){
+                } else if($vProfileName != null){              
                     if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
                         //echo 'el nombre '.$vProfileName.' existe!';
                         $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
@@ -43,10 +43,60 @@ class profileController extends IdEnController
                         $this->redirect('admin');
                     }
                 }
-
+                
+                /* BEGIN USER ACCOUNT INFORMATION */
                 $this->vView->vUserNamesComplete = $this->vUsersData->getUserNamesComplete($this->vUserCode);
-                $this->vView->vUserEmail = $this->vUsersData->getUserEmailFromUserCode($this->vUserCode);            
-                $this->vView->vProfileCode = $this->vProfileCode;
+                $this->vView->vUserOtherName = $this->vUsersData->getUserOtherNameFromUserCode($this->vUserCode);
+                $this->vView->vUserDescription = $this->vUsersData->getUserDescriptionFromUserCode($this->vUserCode);
+                $this->vView->vUserNames = ucwords($this->vUsersData->getUserNamesFromUserCode($this->vUserCode));
+                $this->vView->vUserLastNames = ucwords($this->vUsersData->getUserLastNamesFromUserCode($this->vUserCode));            
+                $this->vView->vUserEmail = $this->vUsersData->getUserEmailFromUserCode($this->vUserCode);
+                $this->vView->vUserDateCreate = date_format(date_create($this->vUsersData->getUserDateCreateFromUserCode($this->vUserCode)), 'd/m/Y H:m:s');
+                
+                if($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode) == null){
+                    $this->vView->vUserDateBirth = '';
+                } else {
+                    $this->vView->vUserDateBirth = $this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode);
+                }
+                
+                $this->vView->vUserCountry = ucwords($this->vUsersData->getUserCountryFromUserCode($this->vUserCode));
+                $this->vView->vUserCity = ucwords($this->vUsersData->getUserCityFromUserCode($this->vUserCode));
+                /* END USER ACCOUNT INFORMATION */
+            
+                /* BEGIN PROFILE ACCOUNT INFORMATION */
+                $this->vView->vProfileProfessions = $this->vProfileData->getProfileProfessions($this->vProfileCode);
+                $this->vView->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                /* END PROFILE ACCOUNT INFORMATION */
+            
+                /* BEGIN PROFILE IMAGE */
+                $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileCode);
+                if($this->vImageProfile == ''){
+                    $this->vView->vImageProfile = '<img class="materialboxed responsive-img" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                } else {
+                    $this->vView->vImageProfile = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileCode).'">';
+                }
+                /* END PROFILE IMAGE */            
+            
+                /**********************************/
+                /* BEGIN AUTHENTICATE USER ACTIVE */
+                /**********************************/
+                $this->vView->vUserNamesCompleteMenu = $this->vUsersData->getUserNamesComplete(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'));
+                $this->vView->vUserEmailMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                $this->vView->vUserCodeMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                
+                    /* BEGIN PROFILE IMAGE */
+                    $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
+                    if($this->vImageProfile == ''){
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                    } else {
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1)).'">';
+                    }
+                    /* END PROFILE IMAGE */
+                
+                /********************************/
+                /* END AUTHENTICATE USER ACTIVE */
+                /********************************/
+            
                 $this->vView->visualize('about');
             }
     
@@ -61,8 +111,9 @@ class profileController extends IdEnController
                 /* END VALIDATION TIME SESSION USER */
             
                 $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
-                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);            
-
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
+                
+                /* BEGIN USER ACCOUNT INFORMATION */
                 $this->vView->vUserOtherName = $this->vUsersData->getUserOtherNameFromUserCode($this->vUserCode);
                 $this->vView->vUserDescription = $this->vUsersData->getUserDescriptionFromUserCode($this->vUserCode);
                 $this->vView->vUserNames = ucwords($this->vUsersData->getUserNamesFromUserCode($this->vUserCode));
@@ -73,17 +124,99 @@ class profileController extends IdEnController
                 if($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode) == null){
                     $this->vView->vUserDateBirth = '';
                 } else {
-                    $this->vView->vUserDateBirth = date_format(date_create($this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode)), 'd/m/Y');
+                    $this->vView->vUserDateBirth = $this->vUsersData->getUserDateBirthFromUserCode($this->vUserCode);
                 }
                 
                 $this->vView->vUserCountry = ucwords($this->vUsersData->getUserCountryFromUserCode($this->vUserCode));
                 $this->vView->vUserCity = ucwords($this->vUsersData->getUserCityFromUserCode($this->vUserCode));
+                /* END USER ACCOUNT INFORMATION */
             
+                /* BEGIN PROFILE ACCOUNT INFORMATION */
+                $this->vView->vProfessions = $this->vProfessionData->getProfessions();
+                $this->vView->vUserProfessions = $this->vProfileData->getProfileProfessions($this->vProfileCode);
+                $this->vView->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                /* END PROFILE ACCOUNT INFORMATION */
+            
+                /* BEGIN PROFILE IMAGE */
+                $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileCode);
+                if($this->vImageProfile == ''){
+                    $this->vView->vImageProfile = '<img class="materialboxed responsive-img" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                } else {
+                    $this->vView->vImageProfile = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileCode).'">';
+                }
+                /* END PROFILE IMAGE */            
+            
+                /**********************************/
+                /* BEGIN AUTHENTICATE USER ACTIVE */
+                /**********************************/
                 $this->vView->vUserNamesCompleteMenu = $this->vUsersData->getUserNamesComplete(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'));
-                $this->vView->vUserCode = $this->vUserCode;
                 $this->vView->vUserEmailMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                $this->vView->vUserCodeMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                $this->vView->vProfileCodeMenu = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                    /* BEGIN PROFILE IMAGE */
+                    $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
+                    if($this->vImageProfile == ''){
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                    } else {
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1)).'">';
+                    }
+                    /* END PROFILE IMAGE */
+                
+                /********************************/
+                /* END AUTHENTICATE USER ACTIVE */
+                /********************************/            
             
                 $this->vView->visualize('account');
+            }
+    
+		public function accountProfileImage(){
+				
+                /* BEGIN VALIDATION TIME SESSION USER */
+				if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+						IdEnSession::timeSession();	
+				} else {
+                    $this->redirect('access');
+                }
+                /* END VALIDATION TIME SESSION USER */
+            
+                $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
+                
+                $this->vView->vProfileImagesList = $this->vProfileData->getProfileImages($this->vProfileCode);
+                $this->vView->vProfileCode = $this->vProfileCode;
+            
+                /* BEGIN PROFILE IMAGE */
+                $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileCode);
+                if($this->vImageProfile == ''){
+                    $this->vView->vImageProfile = '<img class="materialboxed responsive-img" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                } else {
+                    $this->vView->vImageProfile = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileCode).'">';
+                }
+                /* END PROFILE IMAGE */            
+                
+                /**********************************/
+                /* BEGIN AUTHENTICATE USER ACTIVE */
+                /**********************************/
+                $this->vView->vUserNamesCompleteMenu = $this->vUsersData->getUserNamesComplete(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'));
+                $this->vView->vUserEmailMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                $this->vView->vUserCodeMenu = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                $this->vView->vProfileCodeMenu = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                    /* BEGIN PROFILE IMAGE */
+                    $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
+                    if($this->vImageProfile == ''){
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                    } else {
+                        $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1)).'">';
+                    }
+                    /* END PROFILE IMAGE */
+                
+                /********************************/
+                /* END AUTHENTICATE USER ACTIVE */
+                /********************************/ 
+            
+                $this->vView->visualize('accountprofileimage');
             }    
 /*******************************************************************************************************************************************/
 /*******************************************************************************************************************************************/

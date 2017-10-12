@@ -225,6 +225,35 @@ section.pre-footer {
 /***********************************/
 /*********** STYLE IMAGES **********/
 /***********************************/
+.card-content p.image-info {
+    font-size: 12px;
+    color: #333;
+}
+
+.card-content p.image-info strong {
+    font-weight: 600;
+}
+
+/*********************************/
+/*********** COLLECTION **********/
+/*********************************/
+.collection .menu {
+    border: 1px thin #FFF;
+}
+.collection-item .menu, .collection-item .menu a {
+    color: #FFF;
+    
+}
+
+/***************************************/
+/*********** ACCOUNT SECTION  **********/
+/***************************************/
+#sectionImageProfile,
+#sectionProfession,
+#sectionProjects {
+    display: none;
+}
+
 
 /* Footer */
 footer {

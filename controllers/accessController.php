@@ -21,7 +21,12 @@ class accessController extends IdEnController
                 /* END VALIDATION TIME SESSION USER */            
 			}
     
-		public function LoginMethod(){
+		public function timeExpired(){
+                IdEnSession::sessionDestroy();
+                $this->vView->visualize('timeExpired');
+            }
+    
+        public function LoginMethod(){
             
 				/* BEGIN VALIDATION TIME SESSION USER */
 				if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){

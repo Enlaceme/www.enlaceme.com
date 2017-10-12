@@ -16,7 +16,19 @@ class universeModel extends IdEnModel
                                                                     tb_enlaceme_usernames.c_othername,
                                                                     tb_enlaceme_profiles.n_codprofile,
                                                                     tb_enlaceme_profiles.c_profilename,
-                                                                    tb_enlaceme_profiles.n_profiletype
+                                                                    tb_enlaceme_profiles.n_profiletype,
+                                                                    (SELECT
+                                                                        tb_enlaceme_images.b_image_content
+                                                                      FROM tb_enlaceme_images
+                                                                        WHERE tb_enlaceme_images.n_codimage = (SELECT
+                                                                                                                    tb_enlaceme_profileimages.n_codimage
+                                                                                                                  FROM tb_enlaceme_profileimages
+                                                                                                                    WHERE tb_enlaceme_profileimages.n_codprofile = tb_enlaceme_profiles.n_codprofile
+                                                                                                                      AND tb_enlaceme_profileimages.n_active = 1)) AS b_image_content,
+                                                                    (SELECT
+                                                                        tb_enlaceme_profiledescription.c_profile_description
+                                                                      FROM tb_enlaceme_profiledescription
+                                                                        WHERE tb_enlaceme_profiledescription.n_codprofile = tb_enlaceme_profiles.n_codprofile) AS c_profile_description
                                                                 FROM tb_enlaceme_users, tb_enlaceme_usernames, tb_enlaceme_profiles
                                                                     WHERE tb_enlaceme_users.n_coduser = tb_enlaceme_usernames.n_coduser
                                                                         AND tb_enlaceme_usernames.n_coduser = tb_enlaceme_profiles.n_coduser

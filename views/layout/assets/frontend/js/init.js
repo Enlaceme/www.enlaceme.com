@@ -25,6 +25,7 @@
     $('.carousel.carousel-slider').carousel({fullWidth: true});
     
 $('.datepicker').pickadate({
+    format: 'yyyy-mm-dd',
     selectMonths: true,
     selectYears: 80,
     min: new Date(1937, 1, 1),
@@ -46,5 +47,7 @@ $('.datepicker').pickadate({
 });     
     
     $('select').material_select();    
+    
+    $('.materialboxed').materialbox();
     
 })(jQuery); // end of jQuery name space

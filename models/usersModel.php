@@ -135,17 +135,6 @@ class usersModel extends IdEnModel
                                                                 AND tb_enlaceme_usernames.n_active = 1;");
 				return $vResultUserCityFromUserCode->fetchColumn();
 				$vResultUserCityFromUserCode->close();
-			}    
-		/*public function getUserNameExists($vUserName)
-			{
-                $vUserName = (string) $vUserName;
-            
-				$vResultUserExists = $this->vDataBase->query("SELECT
-                                                                COUNT(*)
-                                                            FROM tb_enlaceme_users
-                                                            WHERE tb_enlaceme_users.c_username = '$vUserName';");
-				return $vResultUserExists->fetchColumn();
-				$vResultUserExists->close();
 			}
     
 		public function getUserEmailExists($vUserEmail)
@@ -159,7 +148,7 @@ class usersModel extends IdEnModel
 				return $vResultUserEmailExists->fetchColumn();
 				$vResultUserEmailExists->close();
 			}
-        
+    
 		public function getUserAccountStatus($vUserEmail)
 			{
                 $vUserEmail = (string) $vUserEmail;
@@ -170,9 +159,20 @@ class usersModel extends IdEnModel
                                                                         WHERE tb_enlaceme_users.c_email = '$vUserEmail';");
 				return $vResultUserAccountStatus->fetchColumn();
 				$vResultUserAccountStatus->close();
+			}    
+		public function getUserNameExists($vUserName)
+			{
+                $vUserName = (string) $vUserName;
+            
+				$vResultUserExists = $this->vDataBase->query("SELECT
+                                                                COUNT(*)
+                                                            FROM tb_enlaceme_users
+                                                            WHERE tb_enlaceme_users.c_username = '$vUserName';");
+				return $vResultUserExists->fetchColumn();
+				$vResultUserExists->close();
 			}        
     
-		public function getUserName($vUserCode)
+		/*public function getUserName($vUserCode)
 			{
                 $vUserCode = (string) $vUserCode;
             
@@ -429,7 +429,8 @@ class usersModel extends IdEnModel
                                          );
                 return $vResultUpdateUserLastNames;
                 $vResultUpdateUserLastNames->close();
-			}    
+			}
+    
 		public function updateUserOtherName($vUserCode, $vUserOtherName){
                 $vUserCode = (int) $vUserCode;
                 $vUserOtherName = (string) $vUserOtherName;
@@ -497,6 +498,98 @@ class usersModel extends IdEnModel
                                          );
                 return $vResultUpdateUserLastNames;
                 $vResultUpdateUserLastNames->close();
+			}
+    
+		public function updateUserBirthDate($vUserCode, $vUserDateBirth){
+                $vUserCode = (int) $vUserCode;
+                $vUserDateBirth = $vUserDateBirth;
+
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+
+                $vResultUpdateUserBirthDate = $this->vDataBase->prepare("UPDATE
+                                                                            tb_enlaceme_usernames
+                                                                        SET tb_enlaceme_usernames.d_birthdate = :d_birthdate,
+                                                                            tb_enlaceme_usernames.c_usermod = :c_usermod,
+                                                                            tb_enlaceme_usernames.d_datemod = NOW()
+                                                                        WHERE tb_enlaceme_usernames.n_coduser = :n_coduser;")
+                                ->execute(
+                                            array(
+                                                    ':d_birthdate'=>$vUserDateBirth,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_coduser'=>$vUserCode
+                                                 )
+                                         );
+                return $vResultUpdateUserBirthDate;
+                $vResultUpdateUserBirthDate->close();
+			}
+    
+		public function updateUserCountry($vUserCode, $vUserCountry){
+                $vUserCode = (int) $vUserCode;
+                $vUserCountry = (string) $vUserCountry;
+
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+
+                $vResultUpdateUserCountry = $this->vDataBase->prepare("UPDATE
+                                                                            tb_enlaceme_usernames
+                                                                        SET tb_enlaceme_usernames.c_country = :c_country,
+                                                                            tb_enlaceme_usernames.c_usermod = :c_usermod,
+                                                                            tb_enlaceme_usernames.d_datemod = NOW()
+                                                                        WHERE tb_enlaceme_usernames.n_coduser = :n_coduser;")
+                                ->execute(
+                                            array(
+                                                    ':c_country'=>$vUserCountry,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_coduser'=>$vUserCode
+                                                 )
+                                         );
+                return $vResultUpdateUserCountry;
+                $vResultUpdateUserCountry->close();
+			}
+    
+		public function updateUserCity($vUserCode, $vUserCity){
+                $vUserCode = (int) $vUserCode;
+                $vUserCity = (string) $vUserCity;
+
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+
+                $vResultUpdateUserCity = $this->vDataBase->prepare("UPDATE
+                                                                            tb_enlaceme_usernames
+                                                                        SET tb_enlaceme_usernames.c_city = :c_city,
+                                                                            tb_enlaceme_usernames.c_usermod = :c_usermod,
+                                                                            tb_enlaceme_usernames.d_datemod = NOW()
+                                                                        WHERE tb_enlaceme_usernames.n_coduser = :n_coduser;")
+                                ->execute(
+                                            array(
+                                                    ':c_city'=>$vUserCity,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_coduser'=>$vUserCode
+                                                 )
+                                         );
+                return $vResultUpdateUserCity;
+                $vResultUpdateUserCity->close();
+			}
+    
+		public function updateUserDescription($vUserCode, $vUserDescription){
+                $vUserCode = (int) $vUserCode;
+                $vUserDescription = (string) stripslashes(htmlentities($vUserDescription));
+
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+            
+                $vResultUpdateUserCity = $this->vDataBase->prepare("UPDATE
+                                                                            tb_enlaceme_usernames
+                                                                        SET tb_enlaceme_usernames.t_description = :t_description,
+                                                                            tb_enlaceme_usernames.c_usermod = :c_usermod,
+                                                                            tb_enlaceme_usernames.d_datemod = NOW()
+                                                                        WHERE tb_enlaceme_usernames.n_coduser = :n_coduser;")
+                                ->execute(
+                                            array(
+                                                    ':t_description'=>$vUserDescription,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_coduser'=>$vUserCode
+                                                 )
+                                         );
+                return $vResultUpdateUserCity;
+                $vResultUpdateUserCity->close();
 			}    
     
 		public function updateUserStatus($vUserCode, $vActive){

@@ -35,6 +35,7 @@
                 <a href="#!" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="270px"></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#">Más Información</a></li>
+                    <li><a href="<?Php echo BASE_VIEW_URL; ?>universe">Universo</a></li>
                     <?Php
                         if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
                             echo '<li><a href="#" data-activates="slide-out" id="navbar-menu">'.ucwords($this->vUserNamesCompleteMenu).'</a></li>';                            
@@ -45,12 +46,13 @@
                 </ul>
                 
                 <?Php
+                
                     if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
                         echo '
                         <ul id="slide-out" class="side-nav">
                             <li>
                                 <div class="userView deep-orange">
-                                    <img class="user-img-profile circle" src="'.$vParamsViewProfile['root_profile_resources_img'].'men-profile.jpg">
+                                    '.$this->vImageProfileMenu.'
                                     <span class="white-text name">'.$this->vUserNamesCompleteMenu.'</span>
                                     <span class="white-text email">'.$this->vUserEmailMenu.'</span>
                                 </div>
