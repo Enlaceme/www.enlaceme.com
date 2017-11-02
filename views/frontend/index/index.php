@@ -31,35 +31,51 @@
     <div class="navbar-fixed">
         <nav class="topbar" role="navigation">
             <div class="nav-wrapper container">
-                <a href="#!" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="270px"></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="<?Php echo BASE_VIEW_URL;?>access">Acceder</a></li>
-                    <li><a href="#">Más Información</a></li>
-                </ul>
-
-                <ul id="slide-out" class="side-nav">
-                    <li><a href="<?Php echo BASE_VIEW_URL;?>access">Acceder</a></li>
-                    <li><a href="#">Más Información</a></li>
-                </ul>
-
-                <!--<ul id="slide-out" class="side-nav">
-                    <li>
-                        <div class="user-view">
-                            <div class="background deep-orange">
-                                <img src="images/office.jpg">
-                            </div>
-                            <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-                            <a href="#!name"><span class="white-text name">John Doe</span></a>
-                            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-                        </div>
-                    </li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-                    <li><a href="#!">Second Link</a></li>
-                    <li><div class="divider"></div></li>
-                    <li><a class="subheader">Subheader</a></li>
-                    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-                </ul>-->
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="<?Php echo BASE_VIEW_URL; ?>" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="270px"></a>
+                <?Php
+                    if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                        echo '<ul class="right hide-on-med-and-down">
+                                <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                <li><a href="#" data-activates="slide-out" id="navbar-menu">'.ucwords($this->vUserNamesCompleteMenu).'</a></li>
+                            </ul>';
+                        
+                        /*echo '<ul id="slide-out" class="side-nav">
+                                <li><a href="'.BASE_VIEW_URL.'profile">'.ucwords($this->vUserNamesCompleteMenu).'</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'">Más Información</a></li>
+                            </ul>';*/
+                        
+                        echo '<ul id="slide-out" class="side-nav">
+                                <li>
+                                    <div class="userView deep-orange">
+                                        '.$this->vImageProfileMenu.'
+                                        <span class="white-text name">'.$this->vUserNamesCompleteMenu.'</span>
+                                        <span class="white-text email">'.$this->vUserEmailMenu.'</span>
+                                    </div>
+                                </li>
+                                <li><a href="'.BASE_VIEW_URL.'profile/account/"><i class="fa fa-user fa-2x"></i>Mi Cuenta</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'profile/about/"><i class="material-icons">cloud</i>Sobre Mi</a></li>
+                                <li><div class="divider"></div></li>
+                                <li><a class="subheader">Configuraciones</a></li>
+                                <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
+                                <li><a class="waves-effect" href="'.BASE_VIEW_URL.'access/LogoutMethod">Cerrar Sesión</a></li>
+                            </ul>
+                            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>';
+                        
+                    } else {
+                        echo '<ul class="right hide-on-med-and-down">
+                                <li><a href="'.BASE_VIEW_URL.'access">Acceder</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                            </ul>';
+                        
+                        echo '<ul id="slide-out" class="side-nav">
+                                <li><a href="'.BASE_VIEW_URL.'access">Acceder</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'">Más Información</a></li>
+                            </ul>
+                            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>';
+                    }
+                ?>
             </div>
         </nav>
     </div>
@@ -76,7 +92,7 @@
           <h5 class="col s12 white-text title-h5 weight200">Red social latinoamericana de trabajo, para profesionales, técnicos y/o personas de oficio.</h5>
         </div>
         <div class="row center">
-          <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Comenzar a Usarla</a>
+          <a href="<?Php echo BASE_VIEW_URL; ?>access" id="download-button" class="btn-large waves-effect waves-light deep-orange">Comenzar a Usarla</a>
         </div>
         <br><br>
 
@@ -98,7 +114,7 @@
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Profesionales<i class="material-icons right">more_vert</i></span>
-              <p><a href="#">Mayor información</a></p>
+              <p><a href="<?Php echo BASE_VIEW_URL; ?>professionals">Mayor información</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Profesionales<i class="material-icons right">close</i></span>
@@ -116,7 +132,7 @@
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Técnicos<i class="material-icons right">more_vert</i></span>
-              <p><a href="#">Mayor información</a></p>
+              <p><a href="<?Php echo BASE_VIEW_URL; ?>tecnicos">Mayor información</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Técnicos<i class="material-icons right">close</i></span>
@@ -135,7 +151,7 @@
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Oficio<i class="material-icons right">more_vert</i></span>
-              <p><a href="#">Mayor información</a></p>
+              <p><a href="<?Php echo BASE_VIEW_URL; ?>jobs">Mayor información</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Oficio<i class="material-icons right">close</i></span>
@@ -153,7 +169,7 @@
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Pasatiempos<i class="material-icons right">more_vert</i></span>
-              <p><a href="#">Mayor información</a></p>
+              <p><a href="<?Php echo BASE_VIEW_URL; ?>hobbies">Mayor información</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Pasatiempos<i class="material-icons right">close</i></span>
@@ -173,8 +189,8 @@
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row right-align">
-            <h4 class="grey-text text-darken-2 title-h4">Personas Profesionales</h4>
-            <h5 class="col s6 offset-s6 grey-text text-darken-2 title-h5 weight100">Un lugar donde puedes publicar toda tu trayectoria profesional, con la publicación de todos tus estudios, hasta los lugares en los que has trabajado, los proyectos que has colaborado.</h5>
+            <h4 class="white-text text-darken-2 title-h4">Personas Profesionales</h4>
+            <h5 class="col s6 offset-s6 white-text text-darken-2 title-h5 weight100">Un lugar donde puedes publicar toda tu trayectoria profesional, con la publicación de todos tus estudios, hasta los lugares en los que has trabajado, los proyectos que has colaborado.</h5>
         </div>
       </div>
     </div>
@@ -240,8 +256,8 @@
         <div class="col l3 s12">
         <h5 class="white-text">Datos Legales</h5>
         <ul>
-        <li><a class="link-1 white-text" href="#!">Políticas de Privacidad</a></li>
-        <li><a class="link-1 white-text" href="#!">Términos de Uso</a></li>
+        <li><a class="link-1 white-text" href="<?Php echo BASE_VIEW_URL; ?>policy">Políticas de Privacidad</a></li>
+        <li><a class="link-1 white-text" href="<?Php echo BASE_VIEW_URL; ?>terms">Términos de Uso</a></li>
         </ul>
         </div>
         </div>

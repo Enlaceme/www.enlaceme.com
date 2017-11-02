@@ -32,39 +32,56 @@
     <div class="navbar-fixed">
         <nav class="topbar" role="navigation">
             <div class="nav-wrapper container">
-                <a href="#!" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="270px"></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Más Información</a></li>
-                    <li><a href="<?Php echo BASE_VIEW_URL; ?>universe">Universo</a></li>
+                <a href="#!" class="brand-logo"><img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" width="230px"></a>
                     <?Php
                         if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-                            echo '<li><a href="#" data-activates="slide-out" id="navbar-menu">'.ucwords($this->vUserNamesCompleteMenu).'</a></li>';                            
+                            echo '<ul class="right hide-on-med-and-down">
+                                    <li><a href="'.BASE_VIEW_URL.'">Más Información</a></li>
+                                    <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                    <li><a href="#" data-activates="slide-out" id="navbar-menu">'.ucwords($this->vUserNamesCompleteMenu).'</a></li>
+                                  </ul>';
                         } else {
-                            echo '<li><a href="'.BASE_VIEW_URL.'access">Acceder</a></li>';
+                            echo '<ul class="right hide-on-med-and-down">
+                                    <li><a href="'.BASE_VIEW_URL.'">Más Información</a></li>
+                                    <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                    <li><a href="'.BASE_VIEW_URL.'access">Acceder</a></li>
+                                  </ul>';
                         }
                     ?>
-                </ul>
+                
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                 
                 <?Php
                 
                     if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-                        echo '
-                        <ul id="slide-out" class="side-nav">
-                            <li>
-                                <div class="userView deep-orange">
-                                    '.$this->vImageProfileMenu.'
-                                    <span class="white-text name">'.$this->vUserNamesCompleteMenu.'</span>
-                                    <span class="white-text email">'.$this->vUserEmailMenu.'</span>
-                                </div>
-                            </li>
-                            <li><a href="'.BASE_VIEW_URL.'profile/account/"><i class="fa fa-user fa-2x"></i>Mi Cuenta</a></li>
-                            <li><a href="'.BASE_VIEW_URL.'profile/about/"><i class="material-icons">cloud</i>Sobre Mi</a></li>
-                            <li><div class="divider"></div></li>
-                            <li><a class="subheader">Configuraciones</a></li>
-                            <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
-                            <li><a class="waves-effect" href="'.BASE_VIEW_URL.'access/LogoutMethod">Cerrar Sesión</a></li>
-                        </ul>
-                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>';
+                        echo '<ul id="slide-out" class="side-nav">
+                                <li>
+                                    <div class="userView deep-orange">
+                                        '.$this->vImageProfileMenu.'
+                                        <span class="white-text name">'.$this->vUserNamesCompleteMenu.'</span>
+                                        <span class="white-text email">'.$this->vUserEmailMenu.'</span>
+                                    </div>
+                                </li>
+                                <li><a href="'.BASE_VIEW_URL.'profile/account/"><i class="fa fa-user fa-2x"></i>Mi Cuenta</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'profile/about/"><i class="material-icons">cloud</i>Sobre Mi</a></li>
+                                <li><div class="divider"></div></li>
+                                <li><a class="subheader">Configuraciones</a></li>
+                                <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
+                                <li><a class="waves-effect" href="'.BASE_VIEW_URL.'access/LogoutMethod">Cerrar Sesión</a></li>
+                            </ul>';
+                    } else {
+                        echo '<ul id="slide-out" class="side-nav">
+                                <li>
+                                    <div class="userView deep-orange">
+                                        '.$this->vImageProfileMenu.'
+                                        <span class="white-text name">Red Social Enlaceme</span>
+                                        <span class="white-text email">info@enlaceme.com</span>
+                                    </div>
+                                </li>
+                                <li><a href="'.BASE_VIEW_URL.'">Más Información</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'universe">Universo</a></li>
+                                <li><a href="'.BASE_VIEW_URL.'access">Acceder</a></li>
+                            </ul>';
                     }
                 ?>
             </div>

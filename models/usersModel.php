@@ -348,10 +348,10 @@ class usersModel extends IdEnModel
                 $vActivationcode = (int) $vActivationcode;
                 $vActive = (int) $vActive;
             
-                if(IdEnSession::getSession('vSessionActiveUserName') == null){
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
                     $vUserCreate = 'system['.date('d.m.Y h:m:s').']';
                 } else {
-                    $vUserCreate = (string) IdEnSession::getSession('vSessionActiveUserName');
+                    $vUserCreate = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
                 }
 
 				$vResultUserRegister = $this->vDataBase->prepare("INSERT INTO tb_enlaceme_users(c_username, c_pass1, c_pass2, c_email, c_userrole, n_activationcode, n_active, c_usercreate, d_datecreate)
@@ -382,10 +382,10 @@ class usersModel extends IdEnModel
                 $vCity = (string) $vCity;
                 $vActive = (int) $vActive;
 
-                if(IdEnSession::getSession('vSessionActiveUserName') == null){
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
                     $vUserCreate = 'system['.date('d.m.Y h:m:s').']';
                 } else {
-                    $vUserCreate = (string) IdEnSession::getSession('vSessionActiveUserName');
+                    $vUserCreate = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
                 }
 
 				$vResultUserInfoRegister = $this->vDataBase->prepare("INSERT INTO tb_enlaceme_usernames(n_coduser, c_names, c_lastnames, c_othername, d_birthdate, c_country, c_city, n_active, c_usercreate, d_datecreate)
@@ -596,10 +596,10 @@ class usersModel extends IdEnModel
                 $vUserCode = (int) $vUserCode;
                 $vActive = (int) $vActive;
 
-                if(IdEnSession::getSession('vSessionActiveUserName') == null){
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
                     $vUserMod = 'system['.date('d.m.Y h:m:s').']';
                 } else {
-                    $vUserMod = (string) IdEnSession::getSession('vSessionActiveUserName');
+                    $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
                 }
 
                 $vResultUpdateUserStatus = $this->vDataBase->prepare("UPDATE
@@ -623,10 +623,10 @@ class usersModel extends IdEnModel
                 $vUserCode = (int) $vUserCode;
                 $vActive = (int) $vActive;
             
-                if(IdEnSession::getSession('vSessionActiveUserName') == null){
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
                     $vUserMod = 'system['.date('d.m.Y h:m:s').']';
                 } else {
-                    $vUserMod = (string) IdEnSession::getSession('vSessionActiveUserName');
+                    $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
                 }
 
                 $vResultUpdateUserInfoStatus = $this->vDataBase->prepare("UPDATE
@@ -644,6 +644,37 @@ class usersModel extends IdEnModel
                                          );
                 return $vResultUpdateUserInfoStatus;
                 $vResultUpdateUserInfoStatus->close();
-			}        
+			}
+    
+		public function updateUserPassword($vUserCode, $vPassword, $vRePassword){
+            
+                $vUserCode = (int) $vUserCode;
+                $vPassword = (string) IdEnHash::getHash('sha1',$vPassword,DEFAULT_HASH_KEY);
+                $vRePassword = (string) IdEnHash::getHash('sha1',$vRePassword,DEFAULT_HASH_KEY);            
+            
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+
+                $vResultUpdateUserPassword = $this->vDataBase->prepare("UPDATE
+                                                tb_enlaceme_users
+                                            SET tb_enlaceme_users.c_pass1 = :c_pass1,
+                                                tb_enlaceme_users.c_pass2 = :c_pass2,
+                                                tb_enlaceme_users.c_usermod = :c_usermod,
+                                                tb_enlaceme_users.d_datemod = NOW()
+                                            WHERE tb_enlaceme_users.n_coduser = :n_coduser
+                                                AND tb_enlaceme_users.c_email = :c_email;")
+                                ->execute(
+                                            array(
+                                                    ':c_pass1'=>$vPassword,
+                                                    ':c_pass2'=>$vRePassword,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_coduser'=>$vUserCode,
+                                                    ':c_email'=>$vUserMod
+                                                 )
+                                         );
+                return $vResultUpdateUserPassword;
+                $vResultUpdateUserPassword->close();
+			}
+    
+        
         /* END UPDATE STATEMENT QUERY  */
     }

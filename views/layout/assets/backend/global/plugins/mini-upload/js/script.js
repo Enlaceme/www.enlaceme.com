@@ -1,6 +1,7 @@
 $(function(){
 
     var globalURLEnlaceme = localStorage.getItem(globalURLEnlaceme);
+    
     var ul = $('#upload ul');
 
     $('#drop a').click(function(){

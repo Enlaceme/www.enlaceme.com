@@ -8,6 +8,7 @@ class actionprofileController extends IdEnController
                 $this->vUsersData = $this->LoadModel('users');
                 $this->vProfileData = $this->LoadModel('profile');
                 $this->vProfessionData = $this->LoadModel('profession');
+                $this->vImageData = $this->LoadModel('images');
                 
 			}
 			
@@ -75,6 +76,27 @@ class actionprofileController extends IdEnController
             }
         }
     
+		public function changePassword(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vPassword = (string) $_POST['vPassword'];
+                $vRePassword = (string) $_POST['vRePassword'];
+                
+                if($vPassword != $vRePassword){
+                    $vFormProceed = 1;
+                } else if((strlen($vPassword) <= 3) || (strlen($vRePassword) <= 3)){
+                    $vFormProceed = 2;
+                } else {
+                    $this->vUsersData->updateUserPassword(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), $vPassword, $vRePassword);
+                    $vFormProceed = 'ok';
+                }
+                
+                echo $vFormProceed;
+            }
+        }    
+    
 		public function actionProfileData(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
@@ -114,7 +136,27 @@ class actionprofileController extends IdEnController
                 
                 //echo 'Estamos aqui';
             }
-        }    
+        }
+    
+		public function newContactProfile(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1);
+                
+                $vCountryContact = (string) strtolower($_POST['vCountryContact']);
+                $vCityContact = (string) strtolower($_POST['vCityContact']);
+                $vWhatsapp = (string) $_POST['vWhatsapp'];
+                
+                $this->vProfileContactExists = $this->vProfileData->getProfileContactExists($this->vProfileCode, $vWhatsapp);
+                
+                if($this->vProfileContactExists == 0){
+                    $this->vProfileProjectCode = $this->vProfileData->insertContactProfile($this->vProfileCode, $vCountryContact, $vCityContact, $vWhatsapp, 1);
+                    echo $this->vProfileProjectCode;
+                }
+                
+                //echo 'Estamos aqui';
+            }
+        }     
     
 		public function actionProfessionData(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -171,7 +213,7 @@ class actionprofileController extends IdEnController
                     $vImageName = $_FILES['upl']['name'];
                     $vImageType = pathinfo($_FILES['upl']['name'], PATHINFO_EXTENSION);
                     $vImageSize = $_FILES['upl']['size'];
-                                          
+
                     $vImageContent = addslashes(base64_encode(file_get_contents($_FILES['upl']['tmp_name'])));
                     
                     if(!get_magic_quotes_gpc()){
@@ -182,19 +224,21 @@ class actionprofileController extends IdEnController
                         echo '{"status":"error"}';
                         exit;
                     }
-                    
-                    if(move_uploaded_file($_FILES['upl']['tmp_name'], $vImageProfileRoot.$vImageName)){
-                        //echo '{"status":"success"}';
-                        $this->vImageCode = $this->vProfileData->insertImage($vImageName, $vImageContent, $vImageSize, $vImageType, 1);
 
-                        if(($this->vImageCode != 0) && ($this->vImageCode != '')){
-                            
-                            $this->vProfileImageCode = $this->vProfileData->insertProfileImage($this->vProfileCode, $this->vImageCode, 0);
-                            
-                            $this->vProfileData->updateProfileImageStatus($this->vProfileImageCode, $this->vProfileCode, 1);
-                        }
+                    $this->vImageCode = $this->vImageData->insertImage($this->vProfileCode, $vImageName, $vImageContent, $vImageSize, $vImageType, 1);
+
+                    if(($this->vImageCode != 0) && ($this->vImageCode != '')){
+                        
+                        /* CHANGE PROFILE IMAGES STATUS TO CERO */
+                        $this->vProfileImagesStatus = $this->vProfileData->updateProfileImagesStatus($this->vProfileCode, $vActive);
+                        
+                        /* INSERT IMAGE UPLOADED TO PROFILE */
+                        $this->vProfileImageCode = $this->vProfileData->insertProfileImage($this->vProfileCode, $this->vImageCode, 0);
+
+                        /* CHANGE PROFILE IMAGE UPLOADED STATUS TO ONE */
+                        $this->vProfileData->updateProfileImageStatus($this->vProfileImageCode, $this->vProfileCode, 1);
                         exit;
-                    }
+                    }                    
                 }
 
                 echo '{"status":"error"}';
@@ -215,5 +259,18 @@ class actionprofileController extends IdEnController
             $this->redirect('profile/accountprofileimage');
 
         }
+    
+        public function deleteImageForProfile($vSelectedImageProfileCode = 0){
+            
+            $vSelectedImageProfileCode = (int) $vSelectedImageProfileCode;
+            $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'),1);
+            
+            $this->vProfileData->getImageCodeFromProfileImageCode($vSelectedImageProfileCode);
+            $this->vProfileData->deleteProfileImage($vSelectedImageProfileCode, $this->vProfileCode, 1);
+            $this->vImageData->deleteImage($vSelectedImageProfileCode, 1);
+            
+            $this->redirect('profile/accountprofileimage');
+
+        }    
 	}
 ?>

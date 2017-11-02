@@ -132,6 +132,8 @@ class accessController extends IdEnController
                         $vFormProceed = 4;
                     } else if($vPassword != $vRePassword){
                         $vFormProceed = 5;
+                    } else if((strlen($vPassword) <= 3) || (strlen($vRePassword) <= 3)){
+                        $vFormProceed = 8;
                     }
                        
                     if($vFormProceed == 0){

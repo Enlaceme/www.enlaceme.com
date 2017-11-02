@@ -20,25 +20,53 @@ class universeController extends IdEnController
 			}
 			
 		public function index(){
-            
-                if($vProfileName == null){
-                    if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-                        //echo 'Debe agarrar el usuario logueado!';
+
+                /* BEGIN SESSION ACCOUNT ACCESS */
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                    //echo 'El Usuario esta logueado!';
+                    if($vProfileName == null){
+                        //echo 'El vProfileName es null';
                         $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
                         $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
-                    } else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-                        $this->redirect('admin');
-                    }
-                } else if($vProfileName != null){
-                    if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
-                        //echo 'el nombre '.$vProfileName.' existe!';
-                        $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
-                        $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
-                    } else {
-                        //echo 'el nombre '.$vProfileName.' no existe!';
-                        $this->redirect('admin');
+                    } else if($vProfileName != null){
+                        //echo 'El vProfileName no es null es '.$vProfileName;
+                        if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
+                            //echo 'El vProfileName existe en la DB con código: '.$this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code') == $this->vProfileData->getUserCodeFromProfileCode($this->vProfileData->getProfileCodeIfNameExists($vProfileName))){
+                                //echo 'es el usuario logueado!';
+                                $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
+                                $this->vAuthenticateUser = true;
+                            } else {
+                                //echo 'No es el usuario logueado!';
+                                $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                                $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
+                                $this->vAuthenticateUser = false;
+                            }
+                        } else {
+                            echo 'El vProfileName no existe.';
+                            //$this->redirect('universe');
+                        }                        
+                    }                    
+                } else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                    //echo 'El Usuario no esta logueado!';
+                    if($vProfileName == null){
+                        //echo 'El vProfileName es null';
+                        $this->vView->vBetterRegister = 1;
+                    } else if($vProfileName != null){
+                        //echo 'El vProfileName no es null es '.$vProfileName;
+                        if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
+                            //echo 'El vProfileName existe en la DB con código: '.$this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
+                        } else {
+                            //echo 'El vProfileName no existe.';
+                            $this->vView->vBetterRegister = 1;
+                        }                        
                     }
                 }
+                /* END SESSION ACCOUNT ACCESS */            
+            
             
                 $this->vView->vProfilesActives = $this->vUniverseData->getProfilesActives();
 

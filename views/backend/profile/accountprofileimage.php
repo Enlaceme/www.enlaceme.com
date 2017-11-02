@@ -6,6 +6,14 @@
                 <h2 class="title-h2 thin-text deep-orange-text">Imágenes del Perfil</h2>
             </div>
             
+            <?php
+                if($this->vImageProfileExists == 0){
+                    echo '<div class="col s12 m12 l12">';
+                        echo '<div class="card-panel red darken-3 white-text center-align"><strong>¡UPS!</strong> Ninguna de las imágenes que tienes agregadas a tu cuenta se muestra en tu perfil.</div>';
+                    echo '</div>';
+                }
+            ?>
+            
             <div class="col s12 m12 l4">
                 <div class="card-panel grey darken-3">
                     <form id="upload" method="post" action="<?Php echo BASE_VIEW_URL; ?>actionprofile/actionUploadProfileImg/" enctype="multipart/form-data">
@@ -21,7 +29,9 @@
             
             <div class="col s12 m12 l8">
             <?php
+                
                 if(isset($this->vProfileImagesList) && count($this->vProfileImagesList)){
+                    
                     for($i=0;$i<count($this->vProfileImagesList);$i++){
                         
                         $vSizeImage = round($this->vProfileImagesList[$i]['n_image_size']/1024,2).' KB';
@@ -30,6 +40,7 @@
                             $vColorImageSelected = 'red';
                         } else if($this->vProfileImagesList[$i]['n_active'] == 1){
                             $vColorImageSelected = 'green';
+                            ++$CountNoImage;
                         } else {
                             $vColorImageSelected = 'orange';
                         }
@@ -41,20 +52,28 @@
                         <div class="col s12 m4 l4">
                             <div class="card">
                                 <div class="card-image">
-                                    <img class="materialboxed responsive-img" src="data:image/jpeg;base64,'.$this->vProfileImagesList[$i]['b_image_content'].'" data-caption="'.$this->vProfileImagesList[$i]['c_image_name'].'">
+<div id="imagecontainer">
+    <img class="materialboxed responsive-img" src="data:image/jpeg;base64,'.$this->vProfileImagesList[$i]['b_image_content'].'" data-caption="'.$this->vProfileImagesList[$i]['c_image_name'].'">
+</div>
+
+                                    
                                     <a href="'.BASE_VIEW_URL.'actionprofile/selectImageForProfile/'.$this->vProfileImagesList[$i]['n_codprofileimage'].'" class="btn-floating halfway-fab waves-effect waves-light '.$vColorImageSelected.'">
                                         <i class="material-icons">check_circle</i>
-                                    </a>
+                                    </a>                                    
                                 </div>
                                 <div class="card-content">
                                     <p class="image-info"><strong>Tamaño: </strong>'.$vSizeImage.'</p>
                                     <p class="image-info"><strong>Tipo: </strong>'.$this->vProfileImagesList[$i]['c_image_type'].'</p>
                                     <p class="image-info"><strong>Fecha: </strong>'.$vDateImageList.'</p>
+                                    <p class="image-info"><a href="'.BASE_VIEW_URL.'actionprofile/deleteImageForProfile/'.$this->vProfileImagesList[$i]['n_codprofileimage'].'">Eliminar</a></p>
                                 </div>                                   
                             </div>               
                         </div>
                         ';                        
-                    }
+                        
+                    }                    
+                } else{
+                    echo '<div class="card-panel red darken-3 white-text center-align"><strong>¡UPS!</strong> No tienes registrada ninguna imagen a tu perfil. <strong>=(</strong></div>';
                 }
             ?>              
             </div>            
@@ -66,19 +85,7 @@
         </div>        
     </div>
 
-    <!-- BEGIN FOOTER -->
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large deep-orange">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div>
-	
+    <!-- BEGIN FOOTER -->	
 	<footer class="footer-copyright grey darken-4">
         <div class="container">
             <img class="footer-logo logo-200" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" alt="Logotipo Enlaceme.com">

@@ -1,7 +1,11 @@
  /* Bordered form */
+.container-access {
+    width: 300px;
+}
+
 form {
     background-color: #eee;
-    padding: 30px;
+    padding: 20px;
 }
 
 /* Full-width inputs 

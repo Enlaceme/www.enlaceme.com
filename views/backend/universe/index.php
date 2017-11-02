@@ -1,6 +1,15 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
+            <?php
+                if($this->vBetterRegister == 1){
+                    echo '<div class="col s12 m12 l12">';
+                        echo '<div class="card-panel light-green lighten-1 white-text center-align">
+                                <strong>¡No estas conectado!</strong> Para tener una mejor experiencia y utilizar al máximo la red puedes ingresar <a class="white-text" href="'.BASE_VIEW_URL.'access"><b><i>aquí</i></b></a>
+                            </div>';
+                    echo '</div>';
+                }
+            ?>                
             </div>
             
             <?php             
@@ -25,9 +34,15 @@
                                         <p>'.$this->cutLongText($this->vProfilesActives[$i]['c_profile_description'], 100).'</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="'.BASE_VIEW_URL.'profile/about/'.$this->vProfilesActives[$i]['c_profilename'].'" class="deep-orange-text">Ver perfil</a>
-                                        <a href="'.BASE_VIEW_URL.'" class="deep-orange-text">Contactar</a>
-                                    </div>                                    
+                                        <a href="'.BASE_VIEW_URL.'profile/about/'.$this->vProfilesActives[$i]['c_profilename'].'"  class="waves-effect waves-light btn deep-orange darken-3 white-text">Visitar este Perfil</a>';
+                        
+                                        if($this->vBetterRegister == 1){
+                                            echo '<a href="'.BASE_VIEW_URL.'" class="waves-effect waves-light btn red darken-3 white-text">¡Registrate y contacta!</a>';
+                                        } else {
+                                            echo '<a href="'.BASE_VIEW_URL.'" class="deep-orange-text">Contactar</a>';
+                                        }
+                                        
+                                echo '</div>                                    
                                 </div>               
                             </div>
                         ';
@@ -37,19 +52,7 @@
         </div>
     </div>
 
-    <!-- BEGIN FOOTER -->
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div>
-	
+    <!-- BEGIN FOOTER -->	
 	<footer class="footer-copyright grey darken-4">
         <div class="container">
             <img class="footer-logo logo-200" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" alt="Logotipo Enlaceme.com">

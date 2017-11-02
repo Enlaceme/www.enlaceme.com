@@ -1,9 +1,33 @@
     <div class="container">
         <div class="row">
+            <div class="col s12 m12 l12">
+            <?php                
+                if($this->vBetterRegister == 1){
+                    echo '<div class="col s12 m12 l12">';
+                        echo '<div class="card-panel light-green lighten-1 white-text center-align">
+                                <strong>¡No estas conectado!</strong> Para tener una mejor experiencia y utilizar al máximo la red puedes ingresar <a class="white-text" href="'.BASE_VIEW_URL.'access"><b><i>aquí</i></b></a>
+                            </div>';
+                    echo '</div>';
+                }
+            ?>                
+            </div>
+            
             <div class="col s12 m4 l3">
               <div class="card">
                 <div class="card-image">
                     <?Php echo $this->vImageProfile; ?>
+                    <?php
+                        if($this->vAuthenticateUser == 1){
+                            if($this->vImageProfileExists == 0){
+                                echo '<div class="col s12 m12 l12">';
+                                    echo '<div class="card-panel red darken-3 white-text center-align">
+                                            <strong>¡UPS!</strong> No tienes imagen de perfil. Cargar una <a class="white-text" href="'.BASE_VIEW_URL.'profile/accountprofileimage"><b><i>aquí</i></b></a>
+                                        </div>';
+                                echo '</div>';  
+                            }
+
+                        }
+                    ?>                    
                 </div>
                 <div class="card-content">
                     <span class="card-title deep-orange-text"><?Php echo ucwords($this->vUserNamesComplete); ?></span>
@@ -18,7 +42,18 @@
                     </p>
                 </div>
                 <div class="card-action center-align">
-                    <a href="#" class="waves-effect waves-light btn deep-orange">Contactar</a>
+                <?Php 
+                if(isset($this->vProfileContact) && count($this->vProfileContact)){
+                   for($i=0;$i<count($this->vProfileContact);$i++){
+                       
+                        if($this->vBetterRegister == 1){
+                            echo '<a href="'.BASE_VIEW_URL.'" class="waves-effect waves-light btn red darken-3 white-text">¡Registrate y contacta!</a>';
+                        } else {
+                            echo '<a href="whatsapp://send?text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.&phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'" class="waves-effect waves-light btn green darken-3 white-text">Enviar Whatsapp</a>';
+                        }
+                    }
+                }
+                ?>
                 </div>                  
               </div>
             </div>
@@ -28,19 +63,27 @@
                 <div class="row">
                     <div class="col s12 m8 l8">
                         <div class="card">
-                            <div class="card-content grey darken-4 lighten-4">
-                                <span class="card-title deep-orange-text">
+                            <div class="card-content">
+                                <h5 class="title-h5 thin-text deep-orange-text">Profesión, Especialidad Técnica, Oficio y/o Pasatiempo registrados.</h5>
                                 <?php 
                                     if(isset($this->vProfileProfessions) && count($this->vProfileProfessions)){
                                         for($i=0;$i<count($this->vProfileProfessions);$i++){
-                                            echo $this->vProfileProfessions[$i]['c_profession_name'];
+                                            //echo $this->vProfileProfessions[$i]['c_profession_name'];
+                                            echo '<div class="chip deep-orange darken-4 white-text">
+                                                        '.ucwords($this->vProfileProfessions[$i]['c_profession_name']).'
+                                                </div>';
                                         }
                                     } else {
-                                        echo 'Este usuario no ha registrado ninguna profesión, trabajo u oficio, por favor sugierelé una.';
+                                        echo 'Este usuario no ha registrado ninguna Profesión, Especialidad Técnica, Oficio y/o Pasatiempo, por favor sugierelé alguna.';
                                     }
-                                ?>                                    
-                                </span>
-                                <p class="white-text">
+                                ?>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-content">
+                                <h5 class="title-h5 thin-text deep-orange-text">Descripción profesión, de especialidad técnica, de oficio y/o de pasatiempo.</h5>
+                                <p>
                                     <?Php 
                                         if($this->vProfileDescription == NULL){
                                             echo 'Este usuario no ha realizado aún la descripción de su profesión, trabajo u oficio, por favor sugierelé una.';
@@ -50,7 +93,9 @@
                                     ?>                                    
                                 </p>
                             </div>
-                        </div>
+                        </div>                        
+
+                        
                         
                         <!--<div class="card">
                             <ul class="collection">
@@ -82,7 +127,7 @@
                                 <div class="collapsible-header"><i class="material-icons">whatshot</i>Marketing Digital</div>
                                 <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                             </li>
-                        </ul>-->                        
+                        </ul>                        
                         
                         <div class="card">
                             <div class="card-image">
@@ -117,7 +162,7 @@
                             <div class="card-action">
                                 <a href="#">This is a link</a>
                             </div>
-                        </div>                        
+                        </div>-->                        
                     </div>
 
                     <div class="col s12 m4 l4">
@@ -134,18 +179,6 @@
     </div>
 
     <!-- BEGIN FOOTER -->
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div>
-	
 	<footer class="footer-copyright grey darken-4">
         <div class="container">
             <img class="footer-logo logo-200" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" alt="Logotipo Enlaceme.com">

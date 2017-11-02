@@ -25,14 +25,20 @@ body {
  }
 
 /* TEXT STYLES */
-h1.title-h1 { font-size: 36px; line-height: 34px; }
-h2.title-h2 { font-size: 32px; line-height: 30px; }
-h3.title-h3 { font-size: 28px; line-height: 26px; }
-h4.title-h4 { font-size: 24px; line-height: 22px; }
-h5.title-h5 { font-size: 20px; line-height: 18px; }
+h1.title-h1 { font-size: 36px; line-height: 36px; }
+h2.title-h2 { font-size: 32px; line-height: 32px; }
+h3.title-h3 { font-size: 28px; line-height: 28px; }
+h4.title-h4 { font-size: 24px; line-height: 24px; }
+h5.title-h5 { font-size: 20px; line-height: 20px; }
 
 p.title-p-1 { font-size: 24px; line-height: 28px; }
 p.title-p-2 { font-size: 20px; line-height: 24px; }
+p.title-p-3 { font-size: 18px; line-height: 22px; }
+p.title-p-4 { font-size: 16px; line-height: 18px; }
+
+.text-justify {
+    text-align: justify;
+}
 
 .thin-text {
     font-weight: lighter;
@@ -42,6 +48,9 @@ p.title-p-2 { font-size: 20px; line-height: 24px; }
 .weight100 { font-weight: 100; }
 .weight200 { font-weight: 200; }
 .weight300 { font-weight: 300; }
+.weight400 { font-weight: 400; }
+.weight500 { font-weight: 500; }
+.weight600 { font-weight: 600; }
 
 .margin-5 { margin: 5px; }
 
@@ -49,6 +58,11 @@ p.title-p-2 { font-size: 20px; line-height: 24px; }
 .margin-right-5 { margin: 0 5px 0 0; }
 .margin-bottom-5 { margin: 0 0 5px 0; }
 .margin-left-5 { margin: 0 0 0 5px; }
+
+.margin-top-10 { margin: 10px 0 0 0; }
+.margin-right-10 { margin: 0 10px 0 0; }
+.margin-bottom-10 { margin: 0 0 10px 0; }
+.margin-left-10 { margin: 0 0 0 10px; }
 
 a.link-1 { font-size: 14px; line-height: 16px; }
 
@@ -67,9 +81,17 @@ a.footer-link-1 { font-size: 14px; line-height: 16px; }
     width: 55%;
 }
 
+.logo-text-75 {
+    width: 75%;
+}
+
+.chip-about {
+    font-size: 100px;
+}
 
 .padding-top-20 { padding-top: 20px; }
 .padding-top-30 { padding-top: 30px; }
+.padding-top-100 { padding-top: 100px; }
 
 /* Topbar */
 .topbar {
@@ -147,7 +169,7 @@ a.footer-link-1 { font-size: 14px; line-height: 16px; }
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
+    padding-top: 5px;
 }
 
 #sidenav-overlay {
@@ -168,9 +190,16 @@ width: 100%;
 }
 
 .parallax-access {
-  min-height: 100%;
+position: relative;
+height:100%;
+min-height:500px;
+width:100%;
+margin:auto;
+text-align: center;
+
+  /*min-height: 100%;
   line-height: 0;
-  /*height: auto;*/
+  height: auto;*/
 }
 
 .parallax-access img.full-bg-1 {
@@ -249,8 +278,10 @@ section.pre-footer {
 /*********** ACCOUNT SECTION  **********/
 /***************************************/
 #sectionImageProfile,
+#sectionPassword,
 #sectionProfession,
-#sectionProjects {
+#sectionProjects,
+#sectionContact{
     display: none;
 }
 
@@ -295,12 +326,35 @@ img.footer-logo {
   #index-banner .section {
     top: 10%;
   }
+.parallax-access {
+position: relative;
+height:100%;
+min-height:500px;
+width:100%;
+margin:auto;
+text-align: center;
+  /*min-height: 100%;
+  line-height: 0;
+  height: auto;*/
+}    
 }
 
 @media only screen and (max-width : 600px) {
   #index-banner .section {
     top: 0;
   }
+.parallax-access {
+position: relative;
+height:100%;
+min-height:500px;
+width:100%;
+margin:auto;
+text-align: center;
+
+  /*min-height: 100%;
+  line-height: 0;
+  height: auto;*/
+}    
 }
 
 .icon-block {
@@ -308,4 +362,9 @@ img.footer-logo {
 }
 .icon-block .material-icons {
   font-size: inherit;
+}
+
+#imagecontainer {    
+   background-size: 250px 250px, cover;
+   overflow:visible;
 }

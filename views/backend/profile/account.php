@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <h2 class="title-h2 thin-text deep-orange-text">Configuración de la cuenta</h2>
-            </div>
+            </div>           
         </div>
         
         <div class="row">
@@ -15,8 +15,10 @@
                         <ul class="collection menu">
                             <li class="collection-item menu deep-orange" id="activeSectionImageProfile"><a href="javascript();" class="white-text">Imagen Perfil</a></li>
                             <li class="collection-item menu deep-orange" id="activeSectionAccount"><a href="javascript();" class="white-text">Datos de Cuenta</a></li>
+                            <li class="collection-item deep-orange" id="activeSectionPassword"><a href="javascript();" class="white-text">Cambiar Contraseña</a></li>
                             <li class="collection-item deep-orange" id="activeSectionProfession"><a href="javascript();" class="white-text">Profesión, Trabajo u oficio</a></li>
-                            <li class="collection-item deep-orange" id="activeSectionProjects"><a href="javascript();" class="white-text">Proyectos</a></li>
+                            <!--<li class="collection-item deep-orange" id="activeSectionProjects"><a href="javascript();" class="white-text">Proyectos</a></li>-->
+                            <li class="collection-item deep-orange" id="activeSectionContact"><a href="javascript();" class="white-text">Información de Contacto</a></li>
                         </ul>
                     </div>
                                        
@@ -103,6 +105,29 @@
                         </form>
                     </div>
                     
+                    <div class="col s12 m12 l12" id="sectionPassword">
+                        <form method="post" id="form-passworddata">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h3 class="title-h3 thin-text deep-orange-text">Cambio de Contraseña</h3>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="password" name="vPassword" id="vPassword" value="">
+                                            <label>Nueva Contraseña</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input type="password" name="vRePassword" id="vRePassword" value="">
+                                            <label>Repetir Contraseña</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
+                                </div>
+                            </div>
+                        </form>
+                    </div>                    
+                    
                     <div id="sectionProfession">
                     
                         <div class="col s12 m12 l12">
@@ -174,7 +199,7 @@
                         </div>
                     </div>
                     
-                    <div id="sectionProjects">
+                    <!--<div id="sectionProjects">
                         <div class="col s12 m12 l12">
                             <form method="post" id="form-projectdata">
                                 <div class="card">
@@ -203,6 +228,68 @@
                                 <a class="btn-floating halfway-fab waves-effect waves-light deep-orange"><i class="material-icons">check_circle</i></a>                               
                             </div>
                         </div>
+                    </div>-->
+
+                    <div id="sectionContact">
+                        <div class="col s12 m12 l12">
+                            <form method="post" id="form-contactdata">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h3 class="title-h3 thin-text deep-orange-text">Información de Contacto</h3>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <input type="text" name="vCountryContact" id="vCountryContact" value="">
+                                                <label>País</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="text" name="vCityContact" id="vCityContact" value="">
+                                                <label>Ciudad</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="text" name="vWhatsapp" id="vWhatsapp" value="">
+                                                <label>Número de Whatsapp</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <input type="submit" class="waves-effect waves-light btn deep-orange" value="Guardar">
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="card">
+                                <div class="card-content">
+                                    <h3 class="title-h3 thin-text deep-orange-text">Contactos Registrados</h3>
+                                    <div class="col s12 m12 m12">
+                                        <p>Puedes verificar el número de whatsapp ingresado, presionando en el icono.</p>
+                                    </div>                                                
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>País, Ciudad</th>
+                                                <th>Whatsapp</th>
+                                                <th>Probar</th>
+                                                <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?Php 
+                                        if(isset($this->vProfileContact) && count($this->vProfileContact)){
+                                           for($i=0;$i<count($this->vProfileContact);$i++){
+                                                echo '<tr>';
+                                                    echo '<td>'.ucwords($this->vProfileContact[$i]['c_contact_country']).', '.ucwords($this->vProfileContact[$i]['c_contact_city']).'</td>';
+                                                    echo '<td>'.$this->vProfileContact[$i]['c_contact_whatsapp'].'</td>';
+                                                    echo '<td><a href="whatsapp://send?text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.&phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'">Probar Whatsapp</a></td>';
+                                                    echo '<td>'.$this->vProfileContact[$i]['n_codprofilecontact'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        ?>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
@@ -212,19 +299,7 @@
         
     </div>
 
-    <!-- BEGIN FOOTER -->
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large deep-orange">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div>
-	
+    <!-- BEGIN FOOTER -->	
 	<footer class="footer-copyright grey darken-4">
         <div class="container">
             <img class="footer-logo logo-200" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" alt="Logotipo Enlaceme.com">

@@ -25,26 +25,64 @@ class profileController extends IdEnController
 			}
     
 		public function about($vProfileName = null){
-                if($vProfileName == null){
-				    if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-                        //echo 'Debe agarrar el usuario logueado!';
+                
+                /* BEGIN SESSION ACCOUNT ACCESS */
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                    IdEnSession::timeSession();	
+                    //echo 'El Usuario esta logueado!';
+                    if($vProfileName == null){
+                        //echo 'El vProfileName es null';
                         $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
                         $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
-					} else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
-						$this->redirect('admin');
-					}
-                } else if($vProfileName != null){              
-                    if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
-                        //echo 'el nombre '.$vProfileName.' existe!';
-                        $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
-                        $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
-                    } else {
-                        //echo 'el nombre '.$vProfileName.' no existe!';
-                        $this->redirect('admin');
+                        
+                        $this->vAuthenticateUser = true;
+                        $this->vImageProfileExists = $this->vProfileData->getImageProfileExists($this->vProfileCode);
+                    } else if($vProfileName != null){
+                        //echo 'El vProfileName no es null es '.$vProfileName;
+                        if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
+                            //echo 'El vProfileName existe en la DB con código: '.$this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code') == $this->vProfileData->getUserCodeFromProfileCode($this->vProfileData->getProfileCodeIfNameExists($vProfileName))){
+                                //echo 'es el usuario logueado!';
+                                $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
+                                $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
+                                $this->vImageProfileExists = $this->vProfileData->getImageProfileExists($this->vProfileCode);
+                                $this->vAuthenticateUser = true;
+                            } else {
+                                //echo 'No es el usuario logueado!';
+                                $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                                $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
+                                $this->vImageProfileExists = $this->vProfileData->getImageProfileExists($this->vProfileCode);
+                                $this->vAuthenticateUser = false;
+                            }
+                        } else {
+                            //echo 'El vProfileName no existe.';
+                            $this->redirect('universe');
+                        }                        
+                    }                    
+                } else if(!IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                    //echo 'El Usuario no esta logueado!';
+                    if($vProfileName == null){
+                        //echo 'El vProfileName es null';
+                        $this->redirect('universe');
+                    } else if($vProfileName != null){
+                        //echo 'El vProfileName no es null es '.$vProfileName;
+                        if($this->vProfileData->getProfileCodeIfNameExists($vProfileName) != 0){
+                            //echo 'El vProfileName existe en la DB con código: '.$this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            $this->vProfileCode = $this->vProfileData->getProfileCodeIfNameExists($vProfileName);
+                            $this->vUserCode = $this->vProfileData->getUserCodeFromProfileCode($this->vProfileCode);
+                            
+                        } else {
+                            //echo 'El vProfileName no existe.';
+                            $this->redirect('universe');
+                        }                        
                     }
+                    $this->vView->vBetterRegister = 1;
                 }
+                /* END SESSION ACCOUNT ACCESS */
                 
                 /* BEGIN USER ACCOUNT INFORMATION */
+                $this->vView->vAuthenticateUser = $this->vAuthenticateUser;
+                $this->vView->vImageProfileExists = $this->vImageProfileExists;
                 $this->vView->vUserNamesComplete = $this->vUsersData->getUserNamesComplete($this->vUserCode);
                 $this->vView->vUserOtherName = $this->vUsersData->getUserOtherNameFromUserCode($this->vUserCode);
                 $this->vView->vUserDescription = $this->vUsersData->getUserDescriptionFromUserCode($this->vUserCode);
@@ -66,6 +104,7 @@ class profileController extends IdEnController
                 /* BEGIN PROFILE ACCOUNT INFORMATION */
                 $this->vView->vProfileProfessions = $this->vProfileData->getProfileProfessions($this->vProfileCode);
                 $this->vView->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                $this->vView->vProfileContact = $this->vProfileData->getProfileContact($this->vProfileCode);
                 /* END PROFILE ACCOUNT INFORMATION */
             
                 /* BEGIN PROFILE IMAGE */
@@ -108,7 +147,7 @@ class profileController extends IdEnController
 				} else {
                     $this->redirect('access');
                 }
-                /* END VALIDATION TIME SESSION USER */
+                /* END VALIDATION TIME SESSION USER */           
             
                 $this->vUserCode = IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code');
                 $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($this->vUserCode, 1);
@@ -135,6 +174,7 @@ class profileController extends IdEnController
                 $this->vView->vProfessions = $this->vProfessionData->getProfessions();
                 $this->vView->vUserProfessions = $this->vProfileData->getProfileProfessions($this->vProfileCode);
                 $this->vView->vProfileDescription = $this->vProfileData->getProfileDescriptionFromProfileCode($this->vProfileCode);
+                $this->vView->vProfileContact = $this->vProfileData->getProfileContact($this->vProfileCode);
                 /* END PROFILE ACCOUNT INFORMATION */
             
                 /* BEGIN PROFILE IMAGE */
@@ -207,8 +247,10 @@ class profileController extends IdEnController
                     $this->vImageProfile = $this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
                     if($this->vImageProfile == ''){
                         $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="'.BASE_VIEW_URL.'views/layout/'.DEFAULT_VIEW_LAYOUT.'/backend/resources/img/men-profile.jpg">';
+                        $this->vView->vImageProfileExists = $this->vProfileData->getImageProfileExists($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
                     } else {
                         $this->vView->vImageProfileMenu = '<img class="responsive-img circle" src="data:image/jpeg;base64,'.$this->vProfileData->getImageProfile($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1)).'">';
+                        $this->vView->vImageProfileExists = $this->vProfileData->getImageProfileExists($this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'), 1));
                     }
                     /* END PROFILE IMAGE */
                 

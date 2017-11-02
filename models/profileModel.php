@@ -174,6 +174,20 @@ class profileModel extends IdEnModel
 				$vResultImageProfile->close();
 			}
     
+		public function getImageProfileExists($vProfileCode)
+			{
+                $vProfileCode = (int) $vProfileCode;
+            
+				$vResultImageProfileExists = $this->vDataBase->query("SELECT
+                                                                            COUNT(*)
+                                                                        FROM tb_enlaceme_profileimages
+                                                                            WHERE tb_enlaceme_profileimages.n_codprofile = $vProfileCode
+                                                                                AND tb_enlaceme_profileimages.n_active = 1
+                                                                                    ORDER BY n_codprofileimage DESC;");
+				return $vResultImageProfileExists->fetchColumn();
+				$vResultImageProfileExists->close();
+			}    
+    
 		public function getProfileImageCode($vProfileCode)
 			{
                 $vProfileCode = (int) $vProfileCode;
@@ -187,6 +201,19 @@ class profileModel extends IdEnModel
 				$vResultProfileImageCode->close();
 			}
     
+		public function getImageCodeFromProfileImageCode($vProfileImageCode)
+			{
+                $vProfileImageCode = (int) $vProfileImageCode;
+            
+				$vResultImageCodeFromProfileImageCode = $this->vDataBase->query("SELECT
+                                                                    tb_enlaceme_profileimages.n_codimage
+                                                                FROM tb_enlaceme_profileimages
+                                                                    WHERE tb_enlaceme_profileimages.n_codprofileimage = $vProfileImageCode
+                                                                        AND tb_enlaceme_profileimages.n_active = 1;");
+				return $vResultImageCodeFromProfileImageCode->fetchColumn();
+				$vResultImageCodeFromProfileImageCode->close();
+			}    
+    
 		public function getProjectProfileNameExists($vProjectName)
 			{
                 $vProjectName = (string) $vProjectName;
@@ -198,6 +225,41 @@ class profileModel extends IdEnModel
                                                                                     AND tb_enlaceme_projects.n_active = 1");
 				return $vResultProjectProfileNameExists->fetchColumn();
 				$vResultProjectProfileNameExists->close();
+			}
+    
+		public function getProfileContactExists($vProfileCode, $vWhatsapp)
+			{
+                $vProfileCode = (int) $vProfileCode;
+                $vWhatsapp = (string) $vWhatsapp;
+				
+				$vResultProfileContactExists = $this->vDataBase->query("SELECT
+                                                                                COUNT(*)
+                                                                            FROM tb_enlaceme_profilecontacts
+                                                                                WHERE tb_enlaceme_profilecontacts.c_contact_whatsapp = '$vWhatsapp'
+                                                                                    AND tb_enlaceme_profilecontacts.n_codprofile = $vProfileCode;");
+				return $vResultProfileContactExists->fetchColumn();
+				$vResultProfileContactExists->close();
+			}
+    
+		public function getProfileContact($vProfileCode)
+			{
+                $vProfileCode = (int) $vProfileCode;
+				
+				$vResultProfileContact = $this->vDataBase->query("SELECT
+                                                                        tb_enlaceme_profilecontacts.n_codprofilecontact,
+                                                                        tb_enlaceme_profilecontacts.n_codprofile,
+                                                                        tb_enlaceme_profilecontacts.c_contact_country,
+                                                                        tb_enlaceme_profilecontacts.c_contact_city,
+                                                                        tb_enlaceme_profilecontacts.c_contact_whatsapp,
+                                                                        tb_enlaceme_profilecontacts.n_active,
+                                                                        tb_enlaceme_profilecontacts.c_usercreate,
+                                                                        tb_enlaceme_profilecontacts.d_datecreate,
+                                                                        tb_enlaceme_profilecontacts.c_usermod,
+                                                                        tb_enlaceme_profilecontacts.d_datemod
+                                                                    FROM tb_enlaceme_profilecontacts
+                                                                        WHERE tb_enlaceme_profilecontacts.n_codprofile = $vProfileCode;");
+				return $vResultProfileContact->fetchAll();
+				$vResultProfileContact->close();
 			}    
     
 		/*
@@ -309,31 +371,6 @@ class profileModel extends IdEnModel
                 $vResultInsertProfileProfession->close();            
 			}
     
-		public function insertImage($vImageName, $vImageContent, $vImageSize, $vImageType, $vActive){
-            
-                $vImageName = (string) $vImageName;
-                $vImageContent = $vImageContent;
-                $vImageSize = $vImageSize;
-                $vImageType = (string) $vImageType;
-                $vActive = (int) $vActive;
-
-                $vUserCreate = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
-
-				$vResultInsertImage = $this->vDataBase->prepare("INSERT INTO tb_enlaceme_images(c_image_name, b_image_content, n_image_size, c_image_type, n_active, c_usercreate, d_datecreate)
-																VALUES(:c_image_name, :b_image_content, :n_image_size, :c_image_type, :n_active, :c_usercreate, NOW())")
-								->execute(
-										array(
-                                            ':c_image_name' => $vImageName,
-                                            ':b_image_content' => $vImageContent,
-                                            ':n_image_size' => $vImageSize,
-                                            ':c_image_type' => $vImageType,
-                                            ':n_active' => $vActive,
-                                            ':c_usercreate' => $vUserCreate,
-										));
-                return $vResultInsertImage = $this->vDataBase->lastInsertId();
-                $vResultInsertImage->close();            
-			}
-    
 		public function insertProfileImage($vProfileCode, $vImageCode, $vActive){
             
                 $vProfileCode = (int) $vProfileCode;
@@ -374,6 +411,31 @@ class profileModel extends IdEnModel
 										));
                 return $vResultInsertProjectProfile = $this->vDataBase->lastInsertId();
                 $vResultInsertProjectProfile->close();            
+			}
+    
+		public function insertContactProfile($vProfileCode, $vCountryContact, $vCityContact, $vWhatsapp, $vActive){
+            
+                $vProfileCode = (int) $vProfileCode;
+                $vCountryContact = (string) $vCountryContact;
+                $vCityContact = (string) $vCityContact;
+                $vWhatsapp = (string) $vWhatsapp;
+                $vActive = (int) $vActive;
+
+                $vUserCreate = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+
+				$vResultInsertContactProfile = $this->vDataBase->prepare("INSERT INTO tb_enlaceme_profilecontacts(n_codprofile, c_contact_country, c_contact_city, c_contact_whatsapp, n_active, c_usercreate, d_datecreate)
+																VALUES(:n_codprofile, :c_contact_country, :c_contact_city, :c_contact_whatsapp, :n_active, :c_usercreate, NOW())")
+								->execute(
+										array(
+                                            ':n_codprofile' => $vProfileCode,
+                                            ':c_contact_country' => $vCountryContact,
+                                            ':c_contact_city' => $vCityContact,
+                                            ':c_contact_whatsapp' => $vWhatsapp,                                            
+                                            ':n_active' => $vActive,
+                                            ':c_usercreate' => $vUserCreate,
+										));
+                return $vResultInsertContactProfile = $this->vDataBase->lastInsertId();
+                $vResultInsertContactProfile->close();            
 			}    
         /* END INSERT STATEMENT QUERY  */
         
@@ -457,8 +519,67 @@ class profileModel extends IdEnModel
                                                     ':n_codprofile'=>$vProfileCode
                                                  )
                                          );
+            
                 return $vResultUpdateProfileImageStatus;
                 $vResultUpdateProfileImageStatus->close();
+			}
+    
+		public function updateProfileImagesStatus($vProfileCode, $vActive){
+            
+                $vProfileCode = (int) $vProfileCode;
+                $vActive = (int) $vActive;
+
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
+                    $vUserMod = 'system['.date('d.m.Y h:m:s').']';
+                } else {
+                    $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                }
+
+                $vResultUpdateProfileImagesStatus = $this->vDataBase->prepare("UPDATE
+                                                tb_enlaceme_profileimages
+                                            SET tb_enlaceme_profileimages.n_active = :n_active,
+                                                tb_enlaceme_profileimages.c_usermod = :c_usermod,
+                                                tb_enlaceme_profileimages.d_datemod = NOW()
+                                            WHERE tb_enlaceme_profileimages.n_codprofile = :n_codprofile;")
+                                ->execute(
+                                            array(
+                                                    ':n_active'=>$vActive,
+                                                    ':c_usermod'=>$vUserMod,
+                                                    ':n_codprofile'=>$vProfileCode
+                                                 )
+                                         );
+            
+                return $vResultUpdateProfileImagesStatus;
+                $vResultUpdateProfileImagesStatus->close();
 			}    
-        /* END UPDATE STATEMENT QUERY  */        
+        /* END UPDATE STATEMENT QUERY  */
+    
+        /* BEGIN DELETE STATEMENT QUERY  */
+		public function deleteProfileImage($vProfileImageCode, $vProfileCode, $vActive){
+            
+                $vProfileImageCode = (int) $vProfileImageCode;
+                $vProfileCode = (int) $vProfileCode;
+                $vActive = (int) $vActive;
+
+                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email') == null){
+                    $vUserMod = 'system['.date('d.m.Y h:m:s').']';
+                } else {
+                    $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                }
+                
+                $vResultDeleteProfileImage = $this->vDataBase->prepare("DELETE
+                                                                            FROM tb_enlaceme_profileimages
+                                                                                WHERE tb_enlaceme_profileimages.n_codprofileimage = :n_codprofileimage
+                                                                                    AND tb_enlaceme_profileimages.n_codprofile = :n_codprofile;")
+                                ->execute(
+                                            array(
+                                                    ':n_codprofileimage'=>$vProfileImageCode,
+                                                    ':n_codprofile'=>$vProfileCode
+                                                 )
+                                         );
+            
+                return $vResultDeleteProfileImage;
+                $vResultDeleteProfileImage->close();
+			}    
+        /* END DELETE STATEMENT QUERY  */
     }

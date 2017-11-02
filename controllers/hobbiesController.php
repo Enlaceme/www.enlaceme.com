@@ -1,6 +1,6 @@
 <?Php
 
-class indexController extends IdEnController
+class hobbiesController extends IdEnController
 	{		
 		public function __construct(){
                 parent::__construct();

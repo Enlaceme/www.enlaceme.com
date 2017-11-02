@@ -28,7 +28,7 @@
         <link href="<?Php echo $vParamsViewFrontEndLayout['root_frontend_css']; ?>style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="<?Php echo $vParamsViewBackEndLayout['root_backend_global_plugins']; ?>font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>    
+<body>
     <section class="parallax-access">
         <center>
             <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" />
@@ -66,14 +66,14 @@
                             <div class="row">
                                 <button type="submit" name="btn_login" class="col s12 btn waves-effect deep-orange">Ingresar</button>
                             </div>
-                            <div class="row">
+                            <!--<div class="row">
                                 <button type="submit" name="btn_loginfacebook" class="col s6 l6 btn waves-effect light-blue darken-4">
                                     <i class="fa fa-facebook-official left"></i>Facebook
                                 </button>
                                 <button type="submit" name="btn_logingoogle" class="col l6 s6 btn waves-effect red darken-4">
                                     <i class="fa fa-google-plus-official left"></i>Google
                                 </button>
-                            </div>
+                            </div>-->
                         </center>
                     </form>
                 </div>

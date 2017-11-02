@@ -31,14 +31,14 @@
 <body>    
     <section class="parallax-access">
         <center>
-            <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-white.svg" />
+            <img class="responsive-img" style="width: 250px;" src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>logo-text-dark.svg" />
             <h5 class="deep-orange-text">Por favor, registra tu información.</h5>
             
             <div class="section"></div>
             
             <div class="container">
-                <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE;">                    
-                    <form class="col s12" method="post" id="access-form-register">
+                <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 25px; border: 1px solid #EEE; width: 370px;">
+                    <form class="col s12 m12 l12" method="post" id="access-form-register">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input class="validate" type="text" name="vName" id="vName" />
