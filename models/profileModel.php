@@ -41,8 +41,7 @@ class profileModel extends IdEnModel
 				$vResultUserCodeFromProfileCode = $this->vDataBase->query("SELECT
                                                                             tb_enlaceme_profiles.n_coduser
                                                                         FROM tb_enlaceme_profiles
-                                                                            WHERE tb_enlaceme_profiles.n_codprofile = $vProfileCode
-                                                                                AND tb_enlaceme_profiles.n_active = 1");
+                                                                            WHERE tb_enlaceme_profiles.n_codprofile = $vProfileCode");
 				return $vResultUserCodeFromProfileCode->fetchColumn();
 				$vResultUserCodeFromProfileCode->close();
 			}    
@@ -580,6 +579,28 @@ class profileModel extends IdEnModel
             
                 return $vResultDeleteProfileImage;
                 $vResultDeleteProfileImage->close();
-			}    
+			}
+    
+		public function deleteContactProfile($vContactProfileCode, $vProfileCode){
+            
+                $vContactProfileCode = (int) $vContactProfileCode;
+                $vProfileCode = (int) $vProfileCode;
+
+                $vUserMod = (string) IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Email');
+                
+                $vResultDeleteContactProfile = $this->vDataBase->prepare("DELETE
+                                                                            FROM tb_enlaceme_profilecontacts
+                                                                                WHERE tb_enlaceme_profilecontacts.n_codprofilecontact = :n_codprofilecontact
+                                                                                    AND tb_enlaceme_profilecontacts.n_codprofile = :n_codprofile;")
+                                ->execute(
+                                            array(
+                                                    ':n_codprofilecontact'=>$vContactProfileCode,
+                                                    ':n_codprofile'=>$vProfileCode
+                                                 )
+                                         );
+            
+                return $vResultDeleteContactProfile;
+                $vResultDeleteContactProfile->close();
+			}     
         /* END DELETE STATEMENT QUERY  */
     }

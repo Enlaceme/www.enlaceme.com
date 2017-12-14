@@ -28,9 +28,7 @@ class accessModel extends IdEnModel
                                                         WHERE tb_enlaceme_users.n_coduser = tb_enlaceme_usernames.n_coduser
                                                             AND tb_enlaceme_users.c_email = '$vEmail'
                                                             AND tb_enlaceme_users. c_pass1 = '$vPassword'
-                                                            AND tb_enlaceme_users. c_pass2 = '$vPassword'
-                                                            AND tb_enlaceme_users.n_active = 1
-                                                            AND tb_enlaceme_usernames.n_active = 1;");
+                                                            AND tb_enlaceme_users. c_pass2 = '$vPassword';");
 				return $vResultAccessStatus->fetch();
 				$vResultAccessStatus->close();
 			}
@@ -45,8 +43,7 @@ class accessModel extends IdEnModel
                                                                     FROM tb_enlaceme_users
                                                                         WHERE tb_enlaceme_users.c_email = '$vEmail'
                                                                             AND tb_enlaceme_users. c_pass1 = '$vPassword'
-                                                                            AND tb_enlaceme_users. c_pass2 = '$vPassword'
-                                                                            AND tb_enlaceme_users.n_active = 1");
+                                                                            AND tb_enlaceme_users. c_pass2 = '$vPassword';");
 				return $vResultValidPassword->fetchColumn();
 				$vResultValidPassword->close();
 			}    

@@ -28,13 +28,17 @@ class universeModel extends IdEnModel
                                                                     (SELECT
                                                                         tb_enlaceme_profiledescription.c_profile_description
                                                                       FROM tb_enlaceme_profiledescription
-                                                                        WHERE tb_enlaceme_profiledescription.n_codprofile = tb_enlaceme_profiles.n_codprofile) AS c_profile_description
+                                                                        WHERE tb_enlaceme_profiledescription.n_codprofile = tb_enlaceme_profiles.n_codprofile) AS c_profile_description,
+                                                                    (SELECT
+                                                                        tb_enlaceme_profilecontacts.c_contact_whatsapp
+                                                                      FROM tb_enlaceme_profilecontacts
+                                                                        WHERE tb_enlaceme_profilecontacts.n_codprofile = tb_enlaceme_profiles.n_codprofile) AS c_contact_whatsapp,
+                                                                    tb_enlaceme_users.n_active AS n_active_users,
+                                                                    tb_enlaceme_usernames.n_active AS n_active_usernames,
+                                                                    tb_enlaceme_profiles.n_active AS n_active_profiles
                                                                 FROM tb_enlaceme_users, tb_enlaceme_usernames, tb_enlaceme_profiles
                                                                     WHERE tb_enlaceme_users.n_coduser = tb_enlaceme_usernames.n_coduser
-                                                                        AND tb_enlaceme_usernames.n_coduser = tb_enlaceme_profiles.n_coduser
-                                                                        AND tb_enlaceme_users.n_active = 1
-                                                                        AND tb_enlaceme_usernames.n_active = 1
-                                                                        AND tb_enlaceme_profiles.n_active = 1");
+                                                                        AND tb_enlaceme_usernames.n_coduser = tb_enlaceme_profiles.n_coduser;");
 				return $vResultProfilesActives->fetchAll();
 				$vResultProfilesActives->close();
 			}   

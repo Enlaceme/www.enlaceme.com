@@ -14,8 +14,7 @@ class usersModel extends IdEnModel
 				$vResult = $this->vDataBase->query("SELECT
                                                         CONCAT(tb_enlaceme_usernames.c_names,' ',tb_enlaceme_usernames.c_lastnames) AS c_namescomplete
                                                     FROM tb_enlaceme_usernames
-                                                        WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                            AND tb_enlaceme_usernames.n_active = 1;");
+                                                        WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResult->fetchColumn();
 				$vResult->close();
 			}
@@ -27,8 +26,7 @@ class usersModel extends IdEnModel
 				$vResultUserEmailFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_users.c_email
                                                             FROM tb_enlaceme_users
-                                                            WHERE tb_enlaceme_users.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_users.n_active = 1;");
+                                                            WHERE tb_enlaceme_users.n_coduser = $vUserCode;");
 				return $vResultUserEmailFromUserCode->fetchColumn();
 				$vResultUserEmailFromUserCode->close();
 			}
@@ -40,8 +38,7 @@ class usersModel extends IdEnModel
 				$vResultUserDateCreateFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_users.d_datecreate
                                                             FROM tb_enlaceme_users
-                                                            WHERE tb_enlaceme_users.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_users.n_active = 1;");
+                                                            WHERE tb_enlaceme_users.n_coduser = $vUserCode;");
 				return $vResultUserDateCreateFromUserCode->fetchColumn();
 				$vResultUserDateCreateFromUserCode->close();
 			}
@@ -53,8 +50,7 @@ class usersModel extends IdEnModel
 				$vResultUserNamesFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.c_names
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserNamesFromUserCode->fetchColumn();
 				$vResultUserNamesFromUserCode->close();
 			}
@@ -66,8 +62,7 @@ class usersModel extends IdEnModel
 				$vResultUserLastNamesFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.c_lastnames
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserLastNamesFromUserCode->fetchColumn();
 				$vResultUserLastNamesFromUserCode->close();
 			}
@@ -79,8 +74,7 @@ class usersModel extends IdEnModel
 				$vResultUserOtherNameFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.c_othername
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserOtherNameFromUserCode->fetchColumn();
 				$vResultUserOtherNameFromUserCode->close();
 			}
@@ -92,8 +86,7 @@ class usersModel extends IdEnModel
 				$vResultUserDescriptionFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.t_description
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserDescriptionFromUserCode->fetchColumn();
 				$vResultUserDescriptionFromUserCode->close();
 			}    
@@ -105,8 +98,7 @@ class usersModel extends IdEnModel
 				$vResultUserDateBirthFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.d_birthdate
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserDateBirthFromUserCode->fetchColumn();
 				$vResultUserDateBirthFromUserCode->close();
 			}
@@ -118,8 +110,7 @@ class usersModel extends IdEnModel
 				$vResultUserCountryFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.c_country
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserCountryFromUserCode->fetchColumn();
 				$vResultUserCountryFromUserCode->close();
 			}
@@ -131,8 +122,7 @@ class usersModel extends IdEnModel
 				$vResultUserCityFromUserCode = $this->vDataBase->query("SELECT
                                                                 tb_enlaceme_usernames.c_city
                                                             FROM tb_enlaceme_usernames
-                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode
-                                                                AND tb_enlaceme_usernames.n_active = 1;");
+                                                            WHERE tb_enlaceme_usernames.n_coduser = $vUserCode;");
 				return $vResultUserCityFromUserCode->fetchColumn();
 				$vResultUserCityFromUserCode->close();
 			}
@@ -159,7 +149,8 @@ class usersModel extends IdEnModel
                                                                         WHERE tb_enlaceme_users.c_email = '$vUserEmail';");
 				return $vResultUserAccountStatus->fetchColumn();
 				$vResultUserAccountStatus->close();
-			}    
+			}
+    
 		public function getUserNameExists($vUserName)
 			{
                 $vUserName = (string) $vUserName;
@@ -170,7 +161,128 @@ class usersModel extends IdEnModel
                                                             WHERE tb_enlaceme_users.c_username = '$vUserName';");
 				return $vResultUserExists->fetchColumn();
 				$vResultUserExists->close();
-			}        
+			}
+    
+        public function getUserStatusAccount($vUserCode, $vProfileCode, $vProfileType)
+			{
+                $vUserCode = (int) $vUserCode;
+                $vProfileCode = (int) $vProfileCode;
+                $vProfileType = (int) $vProfileType;
+            
+				$vResultUserStatusAccount = $this->vDataBase->query("SELECT
+                                                                    tb_enlaceme_users.n_active AS user_active,
+                                                                    tb_enlaceme_usernames.n_active AS username_active,
+                                                                    tb_enlaceme_profiles.n_active AS profile_active,
+                                                                    tb_enlaceme_users.c_email
+                                                                    FROM tb_enlaceme_users, tb_enlaceme_usernames, tb_enlaceme_profiles
+                                                                    WHERE tb_enlaceme_users.n_coduser = tb_enlaceme_usernames.n_coduser
+                                                                    AND tb_enlaceme_usernames.n_coduser = tb_enlaceme_profiles.n_coduser
+                                                                    AND tb_enlaceme_profiles.n_coduser = $vUserCode
+                                                                    AND tb_enlaceme_profiles.n_codprofile = $vProfileCode
+                                                                    AND tb_enlaceme_profiles.n_profiletype = $vProfileType;");
+				return $vResultUserStatusAccount->fetchAll();
+				$vResultUserStatusAccount->close();
+			}
+    
+		public function getUserState($vEmail)
+			{
+                $vEmail = (string) $vEmail;
+            
+				$vResultUserState = $this->vDataBase->query("SELECT
+                                                                tb_enlaceme_users.n_active
+                                                            FROM tb_enlaceme_users
+                                                                WHERE tb_enlaceme_users.c_email = '$vEmail';");
+				return $vResultUserState->fetchColumn();
+				$vResultUserState->close();
+			}
+    
+		public function getUserActivationCode($vEmail)
+			{
+                $vEmail = (string) $vEmail;
+            
+				$vResultUserActivationCode = $this->vDataBase->query("SELECT
+                                                                tb_enlaceme_users.n_activationcode
+                                                            FROM tb_enlaceme_users
+                                                                WHERE tb_enlaceme_users.c_email = '$vEmail';");
+				return $vResultUserActivationCode->fetchColumn();
+				$vResultUserActivationCode->close();
+			}    
+    
+		public function getUsers()
+			{
+				$vResultUsers = $this->vDataBase->query("SELECT
+                                                        tb_enlaceme_users.n_coduser,
+                                                        tb_enlaceme_users.c_username,
+                                                        tb_enlaceme_users.c_pass1,
+                                                        tb_enlaceme_users.c_pass2,
+                                                        tb_enlaceme_users.c_email,
+                                                        tb_enlaceme_users.c_userrole,
+                                                        tb_enlaceme_users.n_activationcode,
+                                                        tb_enlaceme_users.n_active,
+                                                        tb_enlaceme_users.c_usercreate,
+                                                        tb_enlaceme_users.d_datecreate,
+                                                        tb_enlaceme_users.c_usermod,
+                                                        tb_enlaceme_users.d_datemod
+                                                    FROM tb_enlaceme_users;");
+				return $vResultUsers->fetchAll();
+				$vResultUsers->close();
+			}
+    
+		public function getUsersActive()
+			{
+				$vResultUsersActive = $this->vDataBase->query("SELECT
+                                                        tb_enlaceme_users.n_coduser,
+                                                        tb_enlaceme_users.c_username,
+                                                        tb_enlaceme_users.c_pass1,
+                                                        tb_enlaceme_users.c_pass2,
+                                                        tb_enlaceme_users.c_email,
+                                                        tb_enlaceme_users.c_userrole,
+                                                        tb_enlaceme_users.n_activationcode,
+                                                        tb_enlaceme_users.n_active,
+                                                        tb_enlaceme_users.c_usercreate,
+                                                        tb_enlaceme_users.d_datecreate,
+                                                        tb_enlaceme_users.c_usermod,
+                                                        tb_enlaceme_users.d_datemod
+                                                    FROM tb_enlaceme_users
+                                                        WHERE tb_enlaceme_users.n_active = 1;");
+				return $vResultUsersActive->fetchAll();
+				$vResultUsersActive->close();
+			}
+    
+		public function getUsersInActive()
+			{
+				$vResultUsersInActive = $this->vDataBase->query("SELECT
+                                                        tb_enlaceme_users.n_coduser,
+                                                        tb_enlaceme_users.c_username,
+                                                        tb_enlaceme_users.c_pass1,
+                                                        tb_enlaceme_users.c_pass2,
+                                                        tb_enlaceme_users.c_email,
+                                                        tb_enlaceme_users.c_userrole,
+                                                        tb_enlaceme_users.n_activationcode,
+                                                        tb_enlaceme_users.n_active,
+                                                        tb_enlaceme_users.c_usercreate,
+                                                        tb_enlaceme_users.d_datecreate,
+                                                        tb_enlaceme_users.c_usermod,
+                                                        tb_enlaceme_users.d_datemod
+                                                    FROM tb_enlaceme_users
+                                                        WHERE tb_enlaceme_users.n_active = 2;");
+				return $vResultUsersInActive->fetchAll();
+				$vResultUsersInActive->close();
+			} 
+    
+		public function getUserCodeFromEmailActivationCode($vActivationCode, $vEmail)
+			{
+                $vActivationCode = (int) $vActivationCode;
+                $vEmail = (string) $vEmail;
+            
+				$vResultUserCodeFromEmailActivationCode = $this->vDataBase->query("SELECT
+                                                                tb_enlaceme_users.n_coduser
+                                                            FROM tb_enlaceme_users
+                                                                WHERE tb_enlaceme_users.n_activationcode = $vActivationCode
+                                                                    AND tb_enlaceme_users.c_email = '$vEmail';");
+				return $vResultUserCodeFromEmailActivationCode->fetchColumn();
+				$vResultUserCodeFromEmailActivationCode->close();
+			}     
     
 		/*public function getUserName($vUserCode)
 			{
@@ -208,43 +320,11 @@ class usersModel extends IdEnModel
 				$vResultUserEmail->close();
 			}    
     
-		public function getUserState($vEmail)
-			{
-                $vEmail = (string) $vEmail;
-            
-				$vResultUserState = $this->vDataBase->query("SELECT
-                                                                tb_enlaceme_users.n_active
-                                                            FROM tb_enlaceme_users
-                                                                WHERE tb_enlaceme_users.c_email = '$vEmail';");
-				return $vResultUserState->fetchColumn();
-				$vResultUserState->close();
-			}    
+    
         
-		public function getUserCodeFromEmailActivationCode($vActivationCode, $vEmail)
-			{
-                $vActivationCode = (int) $vActivationCode;
-                $vEmail = (string) $vEmail;
-            
-				$vResultUserCodeFromEmailActivationCode = $this->vDataBase->query("SELECT
-                                                                tb_enlaceme_users.n_coduser
-                                                            FROM tb_enlaceme_users
-                                                                WHERE tb_enlaceme_users.n_activationcode = $vActivationCode
-                                                                    AND tb_enlaceme_users.c_email = '$vEmail';");
-				return $vResultUserCodeFromEmailActivationCode->fetchColumn();
-				$vResultUserCodeFromEmailActivationCode->close();
-			}        
+       
         
-		public function getUserActivationCode($vEmail)
-			{
-                $vEmail = (string) $vEmail;
-            
-				$vResultUserActivationCode = $this->vDataBase->query("SELECT
-                                                                tb_enlaceme_users.n_activationcode
-                                                            FROM tb_enlaceme_users
-                                                                WHERE tb_enlaceme_users.c_email = '$vEmail';");
-				return $vResultUserActivationCode->fetchColumn();
-				$vResultUserActivationCode->close();
-			}        
+        
     
 		public function getUser($vUserCode)
 			{
@@ -270,25 +350,7 @@ class usersModel extends IdEnModel
 			}    
 
     
-		public function getUsers()
-			{
-				$vResult = $this->vDataBase->query("SELECT
-                                                        tb_enlaceme_users.n_coduser,
-                                                        tb_enlaceme_users.c_username,
-                                                        tb_enlaceme_users.c_pass1,
-                                                        tb_enlaceme_users.c_pass2,
-                                                        tb_enlaceme_users.c_email,
-                                                        tb_enlaceme_users.c_userrole,
-                                                        tb_enlaceme_users.n_activationcode,
-                                                        tb_enlaceme_users.n_active,
-                                                        tb_enlaceme_users.c_usercreate,
-                                                        tb_enlaceme_users.d_datecreate,
-                                                        tb_enlaceme_users.c_usermod,
-                                                        tb_enlaceme_users.d_datemod
-                                                    FROM tb_enlaceme_users;");
-				return $vResult->fetchAll();
-				$vResult->close();
-			}
+
     
 
 		public function getUserInfo($vUserCode)
