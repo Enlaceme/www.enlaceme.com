@@ -189,7 +189,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row right-align">
-            <h4 class="white-text text-darken-2 title-h4">Personas Profesionales</h4>
+            <h4 class="white-text text-darken-2 title-h4">¿Qué neceistas?</h4>
             <h5 class="col s6 offset-s6 white-text text-darken-2 title-h5 weight100">Un lugar donde puedes publicar toda tu trayectoria profesional, con la publicación de todos tus estudios, hasta los lugares en los que has trabajado, los proyectos que has colaborado.</h5>
         </div>
       </div>
@@ -204,22 +204,26 @@
         <div class="col s12 center">
           <h3><i class="mdi-content-send"></i></h3>
           
-            <h4 class="white-text title-h4">¿Qué es lo que hacemos realmente?</h4>
-          <p class="white-text title-p-1 weight100">Enlaceme.com, es un portal web, diseñado exclusivamente sobre los principios de una red social; Orientada aquellas personas que deseen brindar servicios, profesionales, técnicos de oficio o simplemente de pasatiempo como ingreso económico extra; Principalmente deseamos facilitar el registro de información sobre el trabajo o especialidad que las personas realizán y desean promocionar estas habilidades, para que personas que están en busca de estos servicios puedan encontrar la solución a sus necesidades.</p>
+            <h2 class="white-text title-h2">¿Porqué hacemos lo que hacemos?</h2>
+          <p class="white-text title-p-1 weight100">Seguros que nosotros los latinoamericanos hacemos grandes cosas y podemos aún más, por lo que si apoyamos a nuestra gente, nuestro trabajo, nuestros servicios y mejoramos juntos día a día nuestros paises crecerán más y mejor con la gente que los hace grandes.</p>
         </div>
       </div>
         
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send"></i></h3>
-          <h4 class="white-text title-h4">¿Eres profesional independiente?, ¿Deseas hacer conocer tu trabajo?, ¿Tienes experiencia, pero no tienes un título?, ¿Eres estudiante y quieres practicar, además de ganar algo de dinero? ¿Simplemente, quieres algo extra?</h4>
-            <p class="white-text title-p-1 weight100">Si tu te haces todas estas preguntas y más, estas en el lugar correcto, esta es una red social de trabajo, donde podras registrar, cargar y mostrar con descripciones, fotografias, mapas y mucho más todo lo que haces, todo lo que puedes hacer y cual es el monto que cobras por el trabajo.</p>
-
-            <p class="white-text title-p-1 weight100">Además, las personas que contraten tus servicios podrán realizar recomendaciones a otras personas, evaluando tu capacidad de trabajo, el trato que has brindado y lo mejor de todo valorará tu trabajo, agradeciendote!</p>
-
-            <p class="white-text title-p-1 weight100">Y por favor, no lo olvides, esto no es solo para profesionales, tambien es para técnicos, personas que realizan algun oficio o simplemente para personas que deseen ganar dinero extra.</p>
+          <h2 class="white-text title-h2">¿Cómo hacemos lo que ofrecemos</h2>
+            <p class="white-text title-p-1 weight100">Bastante simple, creemos que tan solo con describir tu trabajo, especificar tus habilidades, registrar tus destrezas, compartir tu conocimiento y abrirte al mundo para ayudar a otras personas con sus problemas, necesidades y/o requerimientos, haciendolos de forma correcta, segura, de calidad y ofreciendo un excelente trato no solo mejoraremos latinoamerica si no tambien podremos recibir una remuneración económica a cambio de un buen trabajo hecho.</p>
         </div>
       </div>
+        
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send"></i></h3>
+          <h2 class="white-text title-h2">¿Para qué hacemos lo que ofrecemos?</h2>
+            <p class="white-text title-p-1 weight100">Para que todas las personas que ofrecen un excelente servicio, un magnifico trato hacia los demás y sobre todo a las personas que realizan el trabajo con pasión y calidad, se hagan conocer, aumenten sus clientes y obtengan el pago justo y merecido por el excelente trabajo que realizan.</p>
+        </div>
+      </div>        
 
     </div>
   </div>

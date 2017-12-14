@@ -6,6 +6,22 @@
             </div>           
         </div>
         
+        <?php
+            if(isset($this->vUserStatusAccount) && count($this->vUserStatusAccount)){
+                for($i=0;$i<count($this->vUserStatusAccount);$i++){
+                    if(($this->vUserStatusAccount[$i]['user_active'] == 2) && ($this->vUserStatusAccount[$i]['username_active'] == 2) && ($this->vUserStatusAccount[$i]['profile_active'] == 2)){                       
+                        echo '<div class="row">';
+                            echo '<div class="col s12 m12 l12">';
+                                echo '<div class="card-panel light-green lighten-1 white-text center-align">
+                                        <strong>¡CUENTA INACTIVA!</strong> Por favor debes activarla ingresando <a class="white-text" href="'.BASE_VIEW_URL.'access/sendEmailValidationProfile/'.$this->vUserStatusAccount[$i]['c_email'].'"><b><i>aquí</i></b></a>
+                                    </div>';
+                            echo '</div>';
+                        echo '</div>';
+                    }
+                }
+            }
+        ?>
+        
         <div class="row">
             <div class="col s12 m12 l12">
                 
@@ -145,8 +161,7 @@
                                                             </div>';
                                                     }
                                                 }
-                                            ?>                                    
-
+                                            ?>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -247,7 +262,13 @@
                                             </div>
                                             <div class="input-field col s6">
                                                 <input type="text" name="vWhatsapp" id="vWhatsapp" value="">
-                                                <label>Número de Whatsapp</label>
+                                                <label>Whatsapp ejemplo: +591 - 78795415</label>
+                                            </div>
+                                            <div class="col s6">
+                                                <div class="card-panel teal accent-4 white-text">
+                                                        <img src="<?Php echo $vParamsViewBackEndLayout['root_backend_layouts_images']; ?>whatsapp.svg" width="40">
+                                                        Por favor, debes incluir el código de de tu país delante de tú número de whatsapp.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -279,8 +300,10 @@
                                                 echo '<tr>';
                                                     echo '<td>'.ucwords($this->vProfileContact[$i]['c_contact_country']).', '.ucwords($this->vProfileContact[$i]['c_contact_city']).'</td>';
                                                     echo '<td>'.$this->vProfileContact[$i]['c_contact_whatsapp'].'</td>';
-                                                    echo '<td><a href="whatsapp://send?text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.&phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'">Probar Whatsapp</a></td>';
-                                                    echo '<td>'.$this->vProfileContact[$i]['n_codprofilecontact'].'</td>';
+                                                    //echo '<td><a href="whatsapp://send?text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.&phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'">Probar Whatsapp</a></td>';
+                                                    echo '<td><a href="https://api.whatsapp.com/send?phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'&text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.">Probar Whatsapp</a></td>';
+                                               
+                                                    echo '<td><a href="'.BASE_VIEW_URL.'actionprofile/deleteContactProfile/'.$this->vProfileContact[$i]['n_codprofilecontact'].'"><i class="material-icons">clear</i></a></td>';
                                                 echo '</tr>';
                                             }
                                         }

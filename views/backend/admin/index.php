@@ -7,6 +7,9 @@
                 
                 <div class="row">
                     <div class="col s12 m6">
+                        Usuarios registrados: <?Php echo count($this->vRegisteredUsers); ?><br/>
+                        Usuarios Activos: <?Php echo count($this->vRegisteredUsersActive); ?><br/>
+                        Usuarios Inactivos: <?Php echo count($this->vRegisteredUsersInActive); ?>
                     </div>
 
                     <div class="col s12 m6">

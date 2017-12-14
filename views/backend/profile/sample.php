@@ -41,20 +41,7 @@
                         ?>
                     </p>
                 </div>
-                <div class="card-action center-align">
-                <?Php 
-                if(isset($this->vProfileContact) && count($this->vProfileContact)){
-                   for($i=0;$i<count($this->vProfileContact);$i++){
-                       
-                        if($this->vBetterRegister == 1){
-                            echo '<a href="'.BASE_VIEW_URL.'" class="waves-effect waves-light btn red darken-3 white-text">¡Registrate y contacta!</a>';
-                        } else {
-                            echo '<a href="whatsapp://send?text=Gracias por registrarte en al Red Enlaceme, estamos seguros que lograrás grandes cosas.&phone='.$this->vProfileContact[$i]['c_contact_whatsapp'].'" class="waves-effect waves-light btn green darken-3 white-text">Enviar Whatsapp</a>';
-                        }
-                    }
-                }
-                ?>
-                </div>                  
+                <div class="card-action center-align"> <?Php echo $this->vProfileContact; ?></div>                  
               </div>
             </div>
             
@@ -65,18 +52,7 @@
                         <div class="card">
                             <div class="card-content">
                                 <h5 class="title-h5 thin-text deep-orange-text">Profesión, Especialidad Técnica, Oficio y/o Pasatiempo registrados.</h5>
-                                <?php 
-                                    if(isset($this->vProfileProfessions) && count($this->vProfileProfessions)){
-                                        for($i=0;$i<count($this->vProfileProfessions);$i++){
-                                            //echo $this->vProfileProfessions[$i]['c_profession_name'];
-                                            echo '<div class="chip deep-orange darken-4 white-text">
-                                                        '.ucwords($this->vProfileProfessions[$i]['c_profession_name']).'
-                                                </div>';
-                                        }
-                                    } else {
-                                        echo 'Este usuario no ha registrado ninguna Profesión, Especialidad Técnica, Oficio y/o Pasatiempo, por favor sugierelé alguna.';
-                                    }
-                                ?>
+                                <?php echo $this->vProfileProfessions; ?>
                             </div>
                         </div>
                         
@@ -104,25 +80,9 @@
                                 <li class="collection-item grey lighten-4"><strong class="deep-orange-text">País Residencia: </strong><?Php echo $this->vUserCountry; ?></li>
                                 <li class="collection-item grey lighten-4"><strong class="deep-orange-text">Ciudad Residencia: </strong><?Php echo $this->vUserCity; ?></li>
                             </ul>
-                        </div>
+                        </div>                       
                         
-                      <div class="row">
-                        <div class="col s12 m12">
-                          <div class="card red darken-1">
-                            <div class="card-content white-text">
-                              <span class="card-title"></strong><?Php echo $this->vUserEmail; ?></span>
-                              <p>I am a very simple card. I am good at containing small bits of information.
-                              I am convenient because I require little markup to use effectively.</p>
-                            </div>
-                            <div class="card-action">
-                              <a href="#">This is a link</a>
-                              <a href="#">This is a link</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>                        
-                        <!--
-                        <ul class="collapsible popout" data-collapsible="accordion">
+                        <!--<ul class="collapsible popout" data-collapsible="accordion">
                             <li>
                                 <div class="collapsible-header"><span class="deep-orange-text">Áreas de Conocimiento</span></div>
                                 <div class="collapsible-body"><span>Las áreas de conocimiento describen de forma general los temas que la persona realiza. </span></div>

@@ -67,8 +67,13 @@
                                 <li><div class="divider"></div></li>
                                 <li><a class="subheader">Configuraciones</a></li>
                                 <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
-                                <li><a class="waves-effect" href="'.BASE_VIEW_URL.'access/LogoutMethod">Cerrar Sesión</a></li>
-                            </ul>';
+                                <li><a class="waves-effect" href="'.BASE_VIEW_URL.'access/LogoutMethod">Cerrar Sesión</a></li>';
+                                if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE) && ((IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Role') == 'superadmin') || (IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Role') == 'admin'))){
+                                    echo '<li><div class="divider"></div></li>';
+                                    echo '<li><a class="subheader">Administración</a></li>';
+                                    echo '<li><a class="waves-effect" href="'.BASE_VIEW_URL.'admin">Dashboard</a></li>';
+                                }
+                        echo '</ul>';
                     } else {
                         echo '<ul id="slide-out" class="side-nav">
                                 <li>
