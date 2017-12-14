@@ -68,7 +68,7 @@ class universeController extends IdEnController
                 /* END SESSION ACCOUNT ACCESS */            
             
             
-                $this->vView->vProfilesActives = $this->vUniverseData->getProfilesActives();
+                $this->vView->vProfilesActives = $this->vUniverseData->getProfilesActives();            
 
                 /* BEGIN AUTHENTICATE USER ACTIVE */
                 $this->vView->vUserNamesCompleteMenu = $this->vUsersData->getUserNamesComplete(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'));

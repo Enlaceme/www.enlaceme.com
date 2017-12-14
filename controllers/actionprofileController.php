@@ -272,5 +272,16 @@ class actionprofileController extends IdEnController
             $this->redirect('profile/accountprofileimage');
 
         }    
+    
+        public function deleteContactProfile($vSelectedContactProfileCode = 0){
+            
+            $vSelectedContactProfileCode = (int) $vSelectedContactProfileCode;
+            $this->vProfileCode = $this->vProfileData->getProfileCodeFromUserCode(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE.'Code'),1);
+            
+            $this->vProfileData->deleteContactProfile($vSelectedContactProfileCode, $this->vProfileCode);
+            
+            $this->redirect('profile/account');
+
+        }        
 	}
 ?>
