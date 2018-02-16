@@ -1,0 +1,31 @@
+/* fluid 5 columns */
+.grid-sizer, .grid-item { width: 10%; }
+/* 2 columns */
+.grid-item-20p { width: 20%; }
+/* 2.5 columns */
+.grid-item-25p { width: 25%; }
+/* 3 columns */
+.grid-item-30p { width: 30%; }
+/* 3.5 columns */
+.grid-item-35p { width: 35%; }
+/* 4 columns */
+.grid-item-40p { width: 40%; }
+/* 4.5 columns */
+.grid-item-40p { width: 40%; }
+
+
+/*xs*/
+@media (max-width: 767px) {
+.grid-item-20p , .grid-item-25p, .grid-item-30p, .grid-item-35p, .grid-item-40p, .grid-item-40p { width: 100%; }
+}
+
+/*sm*/
+@media (min-width: 768px) and (max-width: 991px) {
+.grid-item-20p , .grid-item-25p, .grid-item-30p, .grid-item-35p, .grid-item-40p, .grid-item-40p { width: 49%; }
+}
+
+
+/*md*/
+@media (min-width: 992px) and (max-width: 1199px) {
+.grid-item-20p , .grid-item-25p, .grid-item-30p, .grid-item-35p, .grid-item-40p, .grid-item-40p { width: 49%; }
+}
