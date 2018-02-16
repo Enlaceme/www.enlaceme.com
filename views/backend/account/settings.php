@@ -28,8 +28,8 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title tabbable-line">
                                                     <div class="caption caption-md">
-                                                        <i class="icon-globe theme-font hide"></i>
-                                                        <span class="caption-subject font-blue-madison bold uppercase">Información Personal</span>
+                                                        <i class="glyphicon glyphicon-info-sign theme-font font-green-jungle"></i>
+                                                        <span class="caption-subject font-green-jungle bold uppercase">Información Personal</span>
                                                     </div>
                                                     <ul class="nav nav-tabs">
                                                         <li class="active">
@@ -93,7 +93,7 @@
                                                                     <textarea class="form-control" rows="3" name="vDescription" id="vDescription" ><?Php echo $this->vDescription; ?></textarea>
                                                                 </div>
                                                                 <div class="margiv-top-10">
-                                                                   <button type="submit" class="btn green">Actualizar</button>
+                                                                   <button type="submit" class="btn green-jungle">Actualizar</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -119,7 +119,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="margin-top-10">
-                                                                        <a href="javascript:;" class="btn green"> Guardar </a>
+                                                                        <a href="javascript:;" class="btn green-jungle"> Guardar </a>
                                                                         <a href="javascript:;" class="btn default"> Cancelar </a>
                                                                     </div>
                                                                 </form>
@@ -139,7 +139,7 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title tabbable-line">
                                                     <div class="caption caption-md">
-                                                        <i class="icon-globe theme-font hide"></i>
+                                                        <i class="glyphicon glyphicon-lock theme-font font-red"></i>
                                                         <span class="caption-subject font-red bold uppercase">Seguridad de la Cuenta</span>
                                                     </div>
                                                     <ul class="nav nav-tabs">
@@ -279,8 +279,8 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title tabbable-line">
                                                     <div class="caption caption-md">
-                                                        <i class="icon-globe theme-font hide"></i>
-                                                        <span class="caption-subject font-blue-madison bold uppercase">Información de Contacto</span>
+                                                        <i class="glyphicon glyphicon-map-marker theme-font font-blue"></i>
+                                                        <span class="caption-subject font-blue bold uppercase">Información de Contacto</span>
                                                     </div>
                                                     <ul class="nav nav-tabs">
                                                         <li class="active">
@@ -293,7 +293,7 @@
                                                 </div>
                                                 <div class="portlet-body">
                                                     <div class="tab-content">
-                                                        <!-- PERSONAL INFO TAB -->
+                                                        <!-- BEGIN LOCATION INFO TAB -->
                                                         <div class="tab-pane active" id="location_info_1">
                                                             <?Php
                                                                 if($this->vLocation == 1){
@@ -319,7 +319,7 @@
                                                                         </div>
                                                                         <div class="margiv-top-10">
                                                                             <input type="hidden" name="vLocationId" id="vLocationId" value="<?Php echo $this->vLocationId; ?>" />
-                                                                           <button type="submit" class="btn green">Actualizar</button>
+                                                                           <button type="submit" class="btn blue">Actualizar</button>
                                                                         </div>
                                                                     </form>                                                            
                                                             <?Php
@@ -345,7 +345,7 @@
                                                                             <textarea class="form-control" rows="3" name="vAddress" id="vAddress"></textarea>
                                                                         </div>
                                                                         <div class="margiv-top-10">
-                                                                           <button type="submit" class="btn green">Registrar</button>
+                                                                           <button type="submit" class="btn blue">Registrar</button>
                                                                         </div>
                                                                     </form>
                                                             <?Php
@@ -374,7 +374,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="margiv-top-10">
-                                                                    <button type="submit" class="btn green">Registrar</button>
+                                                                    <button type="submit" class="btn blue">Registrar</button>
                                                                 </div>
                                                             </form>
                                                             <div class="clearfix"></div>
@@ -436,9 +436,56 @@
                                                                     </table>';
                                                                }
                                                             ?>                                                            
-                                                        </div>                                                        
-                                                        
-                                                        <!-- END PERSONAL INFO TAB -->
+                                                        </div>
+                                                        <!-- END LOCATION INFO TAB -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="portlet light ">
+                                                <div class="portlet-title tabbable-line">
+                                                    <div class="caption caption-md">
+                                                        <i class="glyphicon glyphicon-briefcase theme-font font-yellow-casablanca"></i>
+                                                        <span class="caption-subject font-yellow-casablanca bold uppercase">Información de Trabajo</span>
+                                                    </div>
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active">
+                                                            <a href="#location_info_1" data-toggle="tab">Especialidad</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <div class="tab-content">
+                                                        <!-- BEGIN WORK INFO TAB -->
+                                                        <div class="tab-pane active" id="location_info_1">
+                                                            <form role="form" action="#" id="form-settings-work">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">País</label>
+                                                                            <input type="text" class="form-control" name="vCountry" id="vCountry" value="<?Php echo $this->vCountry; ?>" />
+                                                                        </div>                                                                            
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Ciudad</label>
+                                                                            <input type="text" class="form-control" name="vCity" id="vCity" value="<?Php echo $this->vCity; ?>" />
+                                                                        </div>                                                                            
+                                                                    </div>                                                                        
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Dirección</label>
+                                                                    <textarea class="form-control" rows="3" name="vAddress" id="vAddress"><?Php echo $this->vAddress; ?></textarea>
+                                                                </div>
+                                                                <div class="margiv-top-10">
+                                                                    <input type="hidden" name="vLocationId" id="vLocationId" value="<?Php echo $this->vLocationId; ?>" />
+                                                                   <button type="submit" class="btn yellow-casablanca">Actualizar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!-- END WORK INFO TAB -->
                                                     </div>
                                                 </div>
                                             </div>

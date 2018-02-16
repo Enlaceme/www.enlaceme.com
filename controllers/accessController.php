@@ -133,6 +133,76 @@ class accessController extends IdEnController
                         }                        
                     }
                 }
+			}
+    
+        public function LoginMethod(){
+            
+				/* BEGIN VALIDATION TIME SESSION USER */
+				/*if(IdEnSession::getSession(DEFAULT_USER_AUTHENTICATE)){
+                        $this->redirect('admin');
+                }*/
+                /* END VALIDATION TIME SESSION USER */            
+            
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $vEmail = (string) strtolower($_POST['vEmail']);
+                    $vPassword = (string) $_POST['vPassword'];
+                    
+                    //echo $vEmail.'-'.$vPassword;
+                    $vVerifyUserStatus = $this->vUsersData->getUserEmailExists($vEmail);
+                    
+                    if($vVerifyUserStatus == 0){
+                        // Email not register in database.
+                        echo '0';
+                    } elseif($vVerifyUserStatus == 1){
+                        // Email exists in database.
+                        $vValidPassword = $this->vAccessData->getValidPassword($vEmail,$vPassword);
+                        
+                        if($vValidPassword == 1){
+                            $vUserAccountStatus = $this->vUsersData->getUserAccountStatus($vEmail);
+
+                            if($vUserAccountStatus == 0){
+                                echo '3';
+                            } elseif($vUserAccountStatus == 1){
+                                $vAccessStatus = $this->vAccessData->getAccessStatus($vEmail,$vPassword);
+                                $vProfileType = 1;
+                                $vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($vAccessStatus['n_coduser'], $vProfileType);
+
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE, true);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Code', $vAccessStatus['n_coduser']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Email', $vAccessStatus['c_email']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Role', $vAccessStatus['c_userrole']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'ProfileCode', $vProfileCode);
+                                IdEnSession::setSession('vTimeSessionUser', time());
+
+                                /*$arrayUserData = array(
+                                                        'vUserCode' => $vUserLoginStatus['n_coduser'],
+                                                        'vUserName' => $this->vLoginData->getUserCompleteNames($vUserLoginStatus['n_coduser'])
+                                                    );
+
+                                echo json_encode($arrayUserData);*/
+
+                                echo '1';
+
+                            } elseif($vUserAccountStatus == 2){
+                                
+                                $vAccessStatus = $this->vAccessData->getAccessStatus($vEmail,$vPassword);
+                                $vProfileType = 1;
+                                $vProfileCode = $this->vProfileData->getProfileCodeFromUserCode($vAccessStatus['n_coduser'], $vProfileType);
+
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE, true);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Code', $vAccessStatus['n_coduser']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Email', $vAccessStatus['c_email']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'Role', $vAccessStatus['c_userrole']);
+                                IdEnSession::setSession(DEFAULT_USER_AUTHENTICATE.'ProfileCode', $vProfileCode);
+                                IdEnSession::setSession('vTimeSessionUser', time());
+                                
+                                echo '2';
+                            }                            
+                        } else {
+                            echo 'invalid-pass';
+                        }
+                    }
+                }
 			}    
     
 		public function LogoutMethod(){

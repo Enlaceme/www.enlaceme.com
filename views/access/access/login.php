@@ -59,13 +59,13 @@
                     <label class="control-label visible-ie8 visible-ie9">Correo Electrónico</label>
                     <div class="input-icon">
                         <i class="fa fa-user"></i>
-                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="correo electrónico" name="username" /> </div>
+                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="correo electrónico" name="vEmail" id="vEmail" /> </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Contraseña</label>
                     <div class="input-icon">
                         <i class="fa fa-lock"></i>
-                        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" name="password" /> </div>
+                        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" name="vPassword" id="vPassword" /> </div>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn green pull-right">Ingresar</button>
