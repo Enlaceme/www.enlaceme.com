@@ -181,7 +181,7 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
-                                    <li><a href="<?Php echo BASE_VIEW_URL; ?>account/settings"><i class="icon-user"></i> Mi Cuenta</a></li>
+                                    <li><a href="<?Php echo BASE_VIEW_URL; ?>account/settings"><i class="glyphicon glyphicon-cog"></i> Mi Cuenta</a></li>
                                     <!--<li>
                                         <a href="#">
                                             <i class="icon-envelope-open"></i> Mensajes
@@ -189,10 +189,7 @@
                                         </a>
                                     </li>-->
                                     <li class="divider"> </li>
-                                    <li>
-                                        <a href="<?Php echo BASE_VIEW_URL; ?>access/LogoutMethod">
-                                            <i class="icon-key"></i>Salir</a>
-                                    </li>
+                                    <li><a href="<?Php echo BASE_VIEW_URL; ?>access/LogoutMethod"><i class="glyphicon glyphicon-log-out"></i>Salir</a></li>
                                 </ul>
                             </li>
                             <!-- END USER LOGIN DROPDOWN -->
@@ -232,7 +229,7 @@
                             <!-- END SIDEBAR TOGGLER BUTTON -->                            
                             <li class="nav-item start ">
                                 <a href="<?Php echo BASE_VIEW_URL; ?>universe/universe" class="nav-link">
-                                    <i class="icon-home"></i>
+                                    <i class="glyphicon glyphicon-globe"></i>
                                     <span class="title">Universo</span>
                                 </a>
                             </li>
@@ -241,19 +238,20 @@
                             </li>
                             <li class="nav-item">
                                 <a href="<?Php echo BASE_VIEW_URL; ?>profile/profile" class="nav-link">
-                                    <i class="icon-diamond"></i>
+                                    <i class="glyphicon glyphicon-user"></i>
                                     <span class="title">Mi Perfil</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-diamond"></i>
+                                    <i class="glyphicon glyphicon-briefcase"></i>
                                     <span class="title">Mis Trabajos</span>
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item ">
                                         <a href="#" class="nav-link ">
+                                            <i class="glyphicon glyphicon-plus"></i>
                                             <span class="title">Registrar Nuevo</span>
                                         </a>
                                     </li>
