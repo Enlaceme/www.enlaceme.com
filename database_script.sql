@@ -81,3 +81,31 @@ CREATE TABLE `tb_enlaceme_profilephones` (
   `d_datemod` datetime DEFAULT NULL,
   PRIMARY KEY  (`n_codprofilephone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_privacy` (
+  `n_codprivacy` int(11) NOT NULL auto_increment,
+  `n_codprofile` int(11) DEFAULT NULL,
+  `n_coduser` int(11) DEFAULT NULL,
+  `t_name` TEXT collate utf8_spanish_ci DEFAULT NULL,
+  `t_desc` TEXT collate utf8_spanish_ci DEFAULT NULL,
+  `n_active` int(11) DEFAULT NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci DEFAULT NULL,
+  `d_datecreate` datetime DEFAULT NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci DEFAULT NULL,
+  `d_datemod` datetime DEFAULT NULL,
+  PRIMARY KEY  (`n_codprivacy`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tb_enlaceme_profileprivacy` (
+  `n_codprofileprivacy` int(11) NOT NULL auto_increment,
+  `n_codprofile` int(11) DEFAULT NULL,
+  `n_coduser` int(11) DEFAULT NULL,
+  `n_codprivacy` int(11) NOT NULL,
+  `n_state` int(11) NOT NULL,
+  `n_active` int(11) DEFAULT NULL,
+  `c_usercreate` varchar(50) collate utf8_spanish_ci DEFAULT NULL,
+  `d_datecreate` datetime DEFAULT NULL,
+  `c_usermod` varchar(50) collate utf8_spanish_ci DEFAULT NULL,
+  `d_datemod` datetime DEFAULT NULL,
+  PRIMARY KEY  (`n_codprofileprivacy`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
