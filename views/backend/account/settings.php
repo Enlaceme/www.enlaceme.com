@@ -183,8 +183,15 @@
                                                                         <div id="rePasswordMessage"></div>
                                                                     </div>                                                                
                                                                 </div>
-                                                                <div class="margin-top-10">
-                                                                    <button type="submit" class="btn red">Cambiar Contraseña</button>
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="margin-top-10">
+                                                                            <button type="submit" class="btn red" id="submitChangePassword">Cambiar Contraseña</button>
+                                                                        </div>                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        <div id="submitMessage"></div>
+                                                                    </div>                                                                
                                                                 </div>
                                                             </form>
                                                         </div>
